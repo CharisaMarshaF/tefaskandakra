@@ -15,13 +15,14 @@ class CsTicketsTableSeeder extends Seeder
     {
         DB::table('cs_tickets')->insert([
             [
-                'id_user'       => 2,
+                'id_user'       => 2, // user pelapor
                 'kode_tiket'    => 'TKT-001',
                 'subject'       => 'Error pada login',
                 'message'       => 'Tidak bisa login setelah update terbaru.',
-                'status'        => 'open', // ✅ sesuai enum
-                'assigned_to'   => 1,
+                'status'        => 'open',
+                'assigned_to'   => 1, // admin yang menangani
                 'catatan_admin' => 'Akan ditindaklanjuti',
+                'id_file'       => 10, // Relasi ke files.id
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now(),
             ],
@@ -30,9 +31,10 @@ class CsTicketsTableSeeder extends Seeder
                 'kode_tiket'    => 'TKT-002',
                 'subject'       => 'Masalah upload file',
                 'message'       => 'Upload file sering gagal.',
-                'status'        => 'in_progress', // ✅ sesuai enum
+                'status'        => 'in_progress',
                 'assigned_to'   => 1,
                 'catatan_admin' => 'Sedang dianalisa',
+                'id_file'       => 11, // Relasi ke files.id
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now(),
             ],
@@ -41,9 +43,10 @@ class CsTicketsTableSeeder extends Seeder
                 'kode_tiket'    => 'TKT-003',
                 'subject'       => 'Permintaan fitur baru',
                 'message'       => 'Ingin menambahkan fitur laporan otomatis.',
-                'status'        => 'closed', // ✅ sesuai enum
+                'status'        => 'closed',
                 'assigned_to'   => 1,
                 'catatan_admin' => 'Sudah diselesaikan',
+                'id_file'       => 12, // Relasi ke files.id
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now(),
             ],

@@ -62,6 +62,41 @@ class FilesTableSeeder extends Seeder
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],
+            [
+                'nama_file'   => 'Proposal Kerjasama.pdf',
+                'file_type'   => 'dokumen',
+                'uploaded_at' => now(),
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ],
+            [
+                'nama_file'   => 'MOU Kerjasama.pdf',
+                'file_type'   => 'dokumen',
+                'uploaded_at' => now(),
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ],
+            [
+                'nama_file'   => 'error-login.png',
+                'file_type'   => 'gambar',
+                'uploaded_at' => now(),
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ],
+            [
+                'nama_file'   => 'log-upload.txt',
+                'file_type'   => 'log',
+                'uploaded_at' => now(),
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ],
+            [
+                'nama_file'   => 'proposal-fitur.pdf',
+                'file_type'   => 'dokumen',
+                'uploaded_at' => now(),
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ],
         ]);
     }
 }

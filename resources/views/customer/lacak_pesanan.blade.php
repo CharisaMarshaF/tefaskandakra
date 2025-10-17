@@ -1,3 +1,4 @@
+
 @extends('layouts.costumer.app')
 
 @section('title', 'Lacak Pesanan')
@@ -19,12 +20,6 @@
     <div class="max-container">
         <div class="form-card ">
             <h4 class="mb-2" style="font-weight:600;">Pesanan Mendatang</h4>
-            <p class="text-muted mb-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                laoreet dolore magna aliquam erat volutpat.
-            </p>
-
-            <a href="{{ route('customer.riwayat_pesanan') }}"><h6 class="mb-4">Riwayat Pesanan</h6></a>
                 <div style="overflow-x:auto;">
 
                     <div class="table-responsive">
@@ -40,32 +35,59 @@
                             </thead>
                             <tbody>
                                 @forelse($orders as $order)
-                                    @foreach($order->items as $item)
-                                    <tr>
-                                        <td>{{ $order->id }}</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <img src="{{ $item->produk->foto ? asset('storage/' . $item->produk->foto) : asset('assets/img/placeholder.png') }}"
-                                                    alt="{{ $item->produk->nama_produk }}" class="me-2"
-                                                    style="width:40px; height:40px; border-radius:4px;">
-                                                <span>{{ $item->produk->nama_produk }}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            {{ $order->estimasi_pengiriman ? $order->estimasi_pengiriman->format('d-m-Y') : '-' }}<br>
-                                            <small class="text-muted">(estimasi)</small>
-                                        </td>
-                                        
-                                        <td>
-                                            {{ $order->order_no ?? '-' }} 🔗
-                                            <i class="bi bi-box-arrow-up-right ms-1"></i>
-                                        </td>
-                                        <td>Rp. {{ number_format($item->subtotal, 0, ',', '.') }}</td>
-                                    </tr>
+                                    @foreach ($order->items as $item)
+                                        <tr>
+                                            <td>{{ $order->id }}</td>
+                                            <td>
+@if ($item->produk)  <!-- Pastikan produk ada -->
+    <div class="d-flex align-items-center">
+        <img src="{{ $item->produk->foto ? asset('storage/' . $item->produk->foto->path) : asset('assets/img/placeholder.png') }}" 
+             alt="{{ $item->produk->nama_produk }}" 
+             class="me-2" 
+             style="width:40px; height:40px; border-radius:4px;">
+        <span>{{ $item->produk->nama_produk }}</span>
+    </div>
+@else
+    <span>Produk tidak tersedia</span>  <!-- Pesan alternatif jika produk tidak ada -->
+@endif
+
+
+                                            </td>
+<td>
+    @if($order->shipment) <!-- Check if shipment exists -->
+        @switch($order->shipment->status)
+            @case('delivered')
+                <span class="badge bg-success">Delivered</span>
+                @break
+            @case('packed')
+                <span class="badge bg-primary">Packed</span>
+                @break
+            @case('shipped')
+                <span class="badge bg-warning">Shipped</span>
+                @break
+            @case('in_transit')
+                <span class="badge bg-info">In Transit</span>
+                @break
+            @default
+                <span class="badge bg-secondary">Unknown</span>
+        @endswitch
+    @else
+        <span class="badge bg-secondary">No Shipment</span>
+    @endif
+    <br>
+    <small class="text-muted">(status)</small>
+</td>
+                                            <td>
+                                                {{ $order->order_no ?? '-' }} 🔗
+                                            </td>
+                                            <td>
+                                                Rp. {{ number_format($order->total, 0, ',', '.') }} <!-- Display total as "Harga" -->
+                                            </td>
+                                        </tr>
                                     @endforeach
-                                @empty
+                                                                    @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">Belum ada pesanan</td>
+                                        <td colspan="4">Tidak ada pesanan ditemukan.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

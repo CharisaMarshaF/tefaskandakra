@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Factory - Manajemen Stok Barang</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Trading Factory</div>
+                    <div class="logo-sub">SISTEM MANAJEMEN</div>
+                </div>
+            </a>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="dasboard.html" class="menu-item active">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+            <a href="produk.html" class="menu-item">
+                <i class="bi bi-box-seam"></i>
+                Produk TEFA
+            </a>
+            <a href="stok.html" class="menu-item ">
+                <i class="bi bi-archive-fill"></i>
+                Stok Bahan
+            </a>
+            <a href="pemesanan.html" class="menu-item">
+                <i class="bi bi-cart-fill"></i>
+                Pemesanan
+            </a>
+            <a href="pembayaran.html" class="menu-item">
+                <i class="bi bi-credit-card-fill"></i>
+                Pembayaran
+            </a>
+            <a href="produksi.html" class="menu-item">
+                <i class="bi bi-gear-fill"></i>
+                Produksi
+            </a>
+            <a href="pengiriman.html" class="menu-item">
+                <i class="bi bi-truck"></i>
+                Pengiriman
+            </a>
+            <a href="siswaguru.html" class="menu-item">
+                <i class="bi bi-people-fill"></i>
+                Siswa & Guru
+            </a>
+            <a href="customer.html" class="menu-item">
+                <i class="bi bi-headset"></i>
+                CS
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-container">
+                <input type="text" placeholder="search here...">
+                <i class="bi bi-search search-icon"></i>
+            </div>
+            
+            <div class="user-section">
+                <i class="bi bi-bell notification-icon"></i>
+                <div class="user-profile">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <h6>Sukadi</h6>
+                        <small>Admin Web</small>
+                    </div>
+                    <i class="bi bi-chevron-down ms-2"></i>
+                </div>
+            </div>
+        </nav>
+
+            <div class="container-fluid p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="mb-0">Dashboard Overview</h2>
+                        <p class="text-muted mb-0">Selamat datang di Admin SMK N 2 Karanganyar</p>
+                    </div>
+                    <button class="btn btn-outline-primary px-4 py-2"><i class="bi bi-arrow-clockwise me-1"></i> Refresh Data</button>
+                </div>
+        
+                <div class="row g-3 mb-4">
+                    <div class="col-6 col-md-3">
+                        <div class="card p-3 shadow-sm rounded-4 summary-card">
+                            <div class="card-body">
+                                <p class="text-muted mb-1">Total User</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title display-6 fw-bold">5</h3>
+                                    <i class="bi bi-people-fill fs-3 text-primary"></i>
+                                </div>
+                                <small class="text-success"><i class="bi bi-arrow-up"></i> +2 bulan ini</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card p-3 shadow-sm rounded-4 summary-card">
+                            <div class="card-body">
+                                <p class="text-muted mb-1">Jurusan Aktif</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title display-6 fw-bold">4</h3>
+                                    <i class="bi bi-book-fill fs-3 text-success"></i>
+                                </div>
+                                <small class="text-muted">Semua aktif</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card p-3 shadow-sm rounded-4 summary-card">
+                            <div class="card-body">
+                                <p class="text-muted mb-1">Login Hari Ini</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title display-6 fw-bold">127</h3>
+                                    <i class="bi bi-person-check-fill fs-3 text-warning"></i>
+                                </div>
+                                <small class="text-danger"><i class="bi bi-arrow-down"></i> -12% vs kemarin</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card p-3 shadow-sm rounded-4 summary-card">
+                            <div class="card-body">
+                                <p class="text-muted mb-1">Mitra DUDI</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title display-6 fw-bold">12</h3>
+                                    <i class="bi bi-book-fill fs-3 text-info"></i>
+                                </div>
+                                <small class="text-success"><i class="bi bi-arrow-up"></i> +3 bulan ini</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-7">
+                        <div class="card p-4 shadow-sm rounded-4">
+                            <h5 class="card-title fw-bold mb-3">Aktivitas Mingguan</h5>
+                            <p class="text-muted mb-4">Grafik login dan aktivitas user dalam 7 hari terakhir</p>
+                            <div class="chart-container" style="height: 250px;">
+                                <canvas id="activityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card p-4 shadow-sm rounded-4">
+                            <h5 class="card-title fw-bold mb-3">Aktivitas Terbaru</h5>
+                            <p class="text-muted mb-4">Log Aktivitas User Terkini</p>
+                            <ul class="list-group list-group-flush activity-list">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0 fw-semibold">Ahmad Fauzi</h6>
+                                        <small class="text-muted">Login ke sistem <i class="bi bi-clock"></i> 5 menit lalu</small>
+                                    </div>
+                                    <span class="badge bg-success">Berhasil</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0 fw-semibold">Admin</h6>
+                                        <small class="text-muted">Menambahkan user baru <i class="bi bi-clock"></i> 15 menit lalu</small>
+                                    </div>
+                                    <span class="badge bg-success">Berhasil</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0 fw-semibold">Budi Santoso</h6>
+                                        <small class="text-muted">Mengubah data jurusan RPL <i class="bi bi-clock"></i> 1 jam lalu</small>
+                                    </div>
+                                    <span class="badge bg-success">Berhasil</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-6">
+                        <div class="card p-4 shadow-sm rounded-4">
+                            <h5 class="card-title fw-bold mb-3">Project Jurusan</h5>
+                            <p class="text-muted mb-4">Ringkasan jumlah project dan progress per jurusan</p>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>RPL</span>
+                                    <span>4 project</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <small class="text-muted">Progress: 85%</small>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Mesin</span>
+                                    <span>3 project</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 78%;" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <small class="text-muted">Progress: 78%</small>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Tekstil</span>
+                                    <span>2 project</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <small class="text-muted">Progress: 90%</small>
+                            </div>
+                            <div class="mb-0">
+                                <div class="d-flex justify-content-between">
+                                    <span>Ototronik</span>
+                                    <span>3 project</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 82%;" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <small class="text-muted">Progress: 82%</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card p-4 shadow-sm rounded-4">
+                            <h5 class="card-title fw-bold mb-3">Status Sistem</h5>
+                            <p class="text-muted mb-4">Kesehatan dan performa sistem saat ini</p>
+                            <ul class="list-group list-group-flush system-status-list">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-server text-primary me-2"></i>
+                                        <span>Server Uptime</span>
+                                    </div>
+                                    <span class="text-muted">99.9% <i class="bi bi-check-circle-fill text-success ms-1"></i></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-hourglass-split text-warning me-2"></i>
+                                        <span>Response Time</span>
+                                    </div>
+                                    <span class="text-muted">124ms <i class="bi bi-arrow-up text-danger ms-1"></i></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>
+                                        <span>Error Rate</span>
+                                    </div>
+                                    <span class="text-muted">0.3% <i class="bi bi-check-circle-fill text-success ms-1"></i></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-hdd-fill text-info me-2"></i>
+                                        <span>Storage Used</span>
+                                    </div>
+                                    <span class="text-muted">2.1 GB <i class="bi bi-check-circle-fill text-success ms-1"></i></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-top pt-3 mt-3">
+                                    <h6 class="mb-0 fw-semibold">Overall Health</h6>
+                                    <span class="badge bg-success">Excellent!</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7Rupx/j6K" crossorigin="anonymous"></script>
+            <script>
+                // Chart.js untuk Aktivitas Mingguan
+                const ctx = document.getElementById('activityChart').getContext('2d');
+                const activityChart = new Chart(ctx, {
+                    type: 'line', // Jenis grafik: garis
+                    data: {
+                        labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'], // Label hari
+                        datasets: [
+                            {
+                                label: 'Login', // Label untuk garis pertama
+                                data: [20, 30, 45, 35, 50, 40, 60], // Data untuk garis pertama (contoh)
+                                borderColor: '#0d6efd', // Warna garis (biru Bootstrap primary)
+                                backgroundColor: 'rgba(13, 110, 253, 0.1)', // Warna area di bawah garis
+                                fill: true, // Mengisi area di bawah garis
+                                tension: 0.4, // Membuat garis sedikit melengkung
+                                pointBackgroundColor: '#0d6efd',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#0d6efd',
+                                pointHoverBorderColor: '#0d6efd'
+                            },
+                            {
+                                label: 'Aktivitas User', // Label untuk garis kedua
+                                data: [15, 25, 35, 25, 40, 30, 45], // Data untuk garis kedua (contoh)
+                                borderColor: '#198754', // Warna garis (hijau Bootstrap success)
+                                backgroundColor: 'rgba(25, 135, 84, 0.1)',
+                                fill: true,
+                                tension: 0.4,
+                                pointBackgroundColor: '#198754',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#198754',
+                                pointHoverBorderColor: '#198754'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, // Grafik responsif
+                        maintainAspectRatio: false, // Memungkinkan tinggi tetap fleksibel
+                        plugins: {
+                            legend: {
+                                display: false // Sembunyikan legenda grafik (karena sudah ada label di teks)
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true // Mulai sumbu Y dari nol
+                            }
+                        }
+                    }
+                });
+            </script>
+        
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7Rupx/j6K" crossorigin="anonymous"></script>
+            <script>
+                // Chart.js untuk Aktivitas Mingguan
+                const ctx = document.getElementById('activityChart').getContext('2d');
+                const activityChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                        datasets: [
+                            {
+                                label: 'Login',
+                                data: [20, 30, 45, 35, 50, 40, 60],
+                                borderColor: '#0d6efd', // Bootstrap primary blue
+                                backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                                fill: true,
+                                tension: 0.4,
+                                pointBackgroundColor: '#0d6efd',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#0d6efd',
+                                pointHoverBorderColor: '#0d6efd'
+                            },
+                            {
+                                label: 'Aktivitas User',
+                                data: [15, 25, 35, 25, 40, 30, 45],
+                                borderColor: '#198754', // Bootstrap success green
+                                backgroundColor: 'rgba(25, 135, 84, 0.1)',
+                                fill: true,
+                                tension: 0.4,
+                                pointBackgroundColor: '#198754',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#198754',
+                                pointHoverBorderColor: '#198754'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false // Hide chart legend
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+       ]
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist.js"></script>
+</body>
+</html>

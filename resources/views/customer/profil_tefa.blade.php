@@ -1,6 +1,5 @@
 @extends('layouts.costumer.app')
 
-
 @section('title', 'Tefa SMKN2Kra')
 
 @section('content')

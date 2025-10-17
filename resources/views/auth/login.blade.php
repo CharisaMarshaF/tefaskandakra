@@ -21,9 +21,9 @@
                     <h1 class="display-5 fw-bold mb-3">Selamat Datang Kembali!</h1>
                     <p class="fs-5 fw-medium mb-3">TEFA SMK N 2 Karanganyar</p>
                     <p class="mb-4">Daftar dengan detail pribadi Anda untuk menggunakan fitur situs</p>
-                    <button class="btn btn-outline-light rounded-pill px-5 py-2 fw-semibold align-self-center align-self-md-start">
-                        Register
-                    </button>
+<a href="{{ route('register') }}" class="btn btn-outline-light rounded-pill px-5 py-2 fw-semibold align-self-center align-self-md-start">
+    Register
+</a>
                 </div>
                 <div class="right-panel col-md-6 p-5 bg-white d-flex flex-column justify-content-center">
                     <h2 class="display-6 fw-bold mb-2">Login</h2>

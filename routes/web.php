@@ -12,6 +12,14 @@ use App\Http\Controllers\Siswa\DashboardController;
 use App\Http\Controllers\waka\SertifikatController;
 use App\Http\Controllers\Customer\CustomerController;
 
+
+use App\Http\Controllers\Admintefa\BahanController;
+use App\Http\Controllers\Admintefa\SigurController;
+use App\Http\Controllers\Admintefa\ProdukController;
+use App\Http\Controllers\Admintefa\ProduksiController;
+use App\Http\Controllers\Admintefa\PemesananController;
+use App\Http\Controllers\Admintefa\PembayaranController;
+use App\Http\Controllers\Admintefa\PengirimanController;
 ///
 
 use App\Http\Controllers\waka\NilaiProjectController;
@@ -30,6 +38,9 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -42,9 +53,51 @@ Route::get('/unauthorized', function () {
 
 // Dashboard untuk tiap role
 Route::middleware(['auth', 'role:1'])->group(function () {
-    Route::get('/dashboard-tefa', function () {
-        return "Halaman khusus Admin TEFA";
-    });
+        // PRODUK
+    Route::get('produk', [ProdukController::class, 'index'])->name('produk.index');
+    Route::post('produk', [ProdukController::class, 'store'])->name('produk.store');
+    Route::get('produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
+    Route::put('produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
+    Route::delete('produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+
+
+        // STOK
+    Route::get('stok', [BahanController::class, 'index']);
+    Route::post('stok', [BahanController::class, 'store'])->name('stok.store');
+    Route::post('stok/tambah', [BahanController::class, 'tambahStok'])->name('tambahStok');
+    Route::delete('stok/{id}', [BahanController::class, 'hapusBahan'])->name('hapusBahan');
+    Route::put('stok/{id}', [BahanController::class, 'edit'])->name('edit');
+    Route::put('stok/{id}', [BahanController::class, 'update'])->name('update');
+
+
+        // PEMESANAN
+    Route::get('pemesanan', [PemesananController::class, 'index']);
+    Route::put('pemesanan/{id}/konfirmasi', [PemesananController::class, 'konfirmasi'])->name('konfirmasi');
+    Route::put('pemesanan/{id}/dikirim', [PemesananController::class, 'dikirim'])->name('dikirim');
+    Route::put('pemesanan/{id}/selesai', [PemesananController::class, 'selesai'])->name('selesai');
+
+
+        // PEMBAYARAN
+    Route::get('pembayaran',[PembayaranController::class,'index']);
+    Route::put('pembayaran/{id}/konfirmasi',[PembayaranController::class,'konfirmasi'])->name('konfirmasi');
+    Route::put('pembayaran/{id}/ditolak',[PembayaranController::class,'tolak'])->name('tolak');
+
+
+        // PRODUKSI
+    Route::get('produksi',[ProduksiController::class,'index']);
+    Route::post('produksi',[ProduksiController::class,'tambah'])->name('produksi.tambah');
+
+
+        // SISWA DAN GURU
+    Route::get('sigur',[SigurController::class,'index']);
+    Route::post('sigur',[SigurController::class,'tambahSiswa'])->name('siswa.store');
+    Route::put('sigur/{id}',[SigurController::class,'update'])->name('siswa.edit');
+    Route::delete('sigur/{id}',[SigurController::class,'destroy'])->name('siswa.hapus');
+    Route::post('sigur/guru',[SigurController::class,'tambahGuru'])->name('guru.store');
+
+        // Pengiriman
+    Route::get('pengiriman',[PengirimanController::class,'index']);
+    Route::post('pengiriman',[PengirimanController::class,'store'])->name('pengiriman.store');
 });
 
 Route::middleware(['auth', 'role:2'])->group(function () {
@@ -155,6 +208,7 @@ Route::middleware(['auth', 'role:8'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:9'])->group(function () {
+    Route::get('/customer/checkout', [CustomerController::class, 'checkout'])->middleware('auth');
     Route::get('/landing-page', [CustomerController::class, 'landingPage'])->name('customer.landing');
     Route::get('/riwayat_pesanan', [CustomerController::class, 'riwayatpesanan'])->name('customer.riwayat_pesanan');
     Route::get('/customer/keranjang', [CustomerController::class, 'keranjang'])->name('customer.keranjang');
@@ -183,7 +237,7 @@ Route::middleware(['auth', 'role:9'])->group(function () {
     Route::get('/customer/landing', [CustomerController::class, 'landingPage'])->name('customer.landing');
     Route::get('/produk/{id}', [CustomerController::class, 'produkDetail'])->name('customer.produk.detail');
     Route::get('/lacak-pesanan', [CustomerController::class, 'lacakPesanan'])->name('lacak.pesanan');
-    Route::get('/produk', [CustomerController::class, 'allProduk'])->name('customer.produk');
+    Route::get('/customer/produk', [CustomerController::class, 'allProduk'])->name('customer.produk');
     Route::get('/search', [App\Http\Controllers\Customer\CustomerController::class, 'search'])->name('customer.search');
     
 });

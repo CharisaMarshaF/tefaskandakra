@@ -32,7 +32,6 @@
             @endif
           </div>
 
-          <!-- Middle: Info Produk -->
           <div data-aos="fade-up" class="col-lg-5">
             <h5 class="fw-bold">{{ $produk->nama_produk }}</h5>
             <p class="text-primary fs-5 fw-semibold">
@@ -103,31 +102,42 @@
           <!-- Right Sidebar Harga -->
           <div data-aos="fade-up" class="col-lg-3">
             <div class="card p-3 shadow-sm" style="background-color: #f8f9fa;">
-              <h6 class="text-muted">TOTAL HARGA:</h6>
-              <p class="fs-5 fw-bold text-primary">Rp. {{ number_format($produk->harga, 0, ',', '.') }}</p>
-              <hr>
+
               <p class="text-success mb-3"><i class="bi bi-check-circle"></i> Stok Tersedia</p>
 
-              <form action="{{ route('customer.keranjang.tambah', $produk->id) }}" method="POST">
-                @csrf
-                <div class="input-group mb-3" style="max-width: 150px;">
-                  <button type="button" class="btn btn-outline-secondary minus-btn">-</button>
-                  <input type="text" name="quantity" class="form-control text-center qty-input" value="1">
-                  <button type="button" class="btn btn-outline-secondary plus-btn">+</button>
-                </div>
+<form action="{{ route('customer.keranjang.tambah', $produk->id) }}" method="POST">
+  @csrf
+  <div class="input-group mb-3" style="max-width: 150px;">
+    <button type="button" class="btn btn-outline-secondary minus-btn">-</button>
+    <input type="text" id="quantity" name="quantity" class="form-control text-center qty-input" value="1">
+    <button type="button" class="btn btn-outline-secondary plus-btn">+</button>
+  </div>
 
-                <button type="submit" class="btn btn-primary w-100 mb-2">
-                  <i class="fa fa-cart-shopping"></i> TAMBAH KERANJANG
-                </button>
-              </form>
+  <button type="submit" class="btn btn-primary w-100 mb-2">
+    <i class="fa fa-cart-shopping"></i> TAMBAH KERANJANG
+  </button>
+</form>
 
-              <form action="{{ route('customer.checkout.proses') }}" method="POST">
-                @csrf
-                <input type="hidden" name="produk_id" value="{{ $produk->id }}">
-                <input type="hidden" name="quantity" class="qty-input" value="1">
-                <button type="submit" class="btn btn-outline-primary w-100">BELI SEKARANG</button>
-              </form>
 
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <p class="mb-1"><strong>Product:</strong> <span id="product-name">{{ $produk->nama_produk }}</span></p>
+    </div>
+    <div>
+        <p class="mb-1"><strong>Total Price:</strong> <span id="total-price">{{ number_format($produk->harga, 0, ',', '.') }}</span></p>
+    </div>
+</div>
+
+
+<!-- Checkout form -->
+<form action="{{ route('customer.checkout.proses') }}" method="POST" id="checkout-form">
+  @csrf
+  <input type="hidden" name="id_produk" value="{{ $produk->id }}">
+  <input type="hidden" name="quantity" id="hidden-quantity" value="1">
+  <input type="hidden" name="total_harga" id="hidden-total-harga" value="{{ $produk->harga }}">
+  
+  <button type="submit" class="btn btn-outline-primary w-100">BELI SEKARANG</button>
+</form>
               <div class="d-flex justify-content-between align-items-center mt-3 text-muted">
                 <span class="text-success"><i class="fa fa-heart"></i> Wishlist</span>
                 <span><i class="fa fa-repeat"></i> Compare</span>
@@ -199,17 +209,49 @@
 </div>
 
 <script>
-document.querySelectorAll('.plus-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    let input = btn.parentElement.querySelector('.qty-input');
-    input.value = parseInt(input.value) + 1;
-  });
-});
-document.querySelectorAll('.minus-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    let input = btn.parentElement.querySelector('.qty-input');
-    if(parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
-  });
+// Fungsi untuk mengupdate total harga berdasarkan quantity
+function updateTotalPrice() {
+  const quantity = parseInt(document.getElementById('quantity').value) || 1; // Ambil quantity dari input
+  const pricePerUnit = {{ $produk->harga }}; // Harga per unit produk
+  const totalPrice = pricePerUnit * quantity; // Total harga berdasarkan quantity
+  
+  // Update total harga di elemen HTML
+  document.getElementById('total-price').innerText = 'Rp. ' + totalPrice.toLocaleString('id-ID');
+  
+  // Update nilai hidden inputs dengan quantity dan total harga yang dihitung
+  document.getElementById('hidden-quantity').value = quantity;
+  document.getElementById('hidden-total-harga').value = totalPrice;
+}
+
+// Fungsi untuk menambah atau mengurangi quantity
+function adjustQuantity(change) {
+  const quantityInput = document.getElementById('quantity');
+  let currentQuantity = parseInt(quantityInput.value) || 1; // Ambil nilai quantity saat ini
+  currentQuantity += change; // Tambah atau kurangi quantity
+  if (currentQuantity < 1) currentQuantity = 1; // Jangan biarkan quantity kurang dari 1
+  quantityInput.value = currentQuantity; // Update value di input quantity
+  
+  updateTotalPrice(); // Perbarui total harga sesuai dengan quantity yang baru
+}
+
+// Memastikan event listener ditambahkan setelah halaman sepenuhnya dimuat
+document.addEventListener('DOMContentLoaded', function() {
+  // Menambahkan event listeners pada tombol + dan -
+  const minusBtn = document.querySelector('.minus-btn');
+  const plusBtn = document.querySelector('.plus-btn');
+
+  if (minusBtn && plusBtn) {
+    minusBtn.addEventListener('click', function() {
+      adjustQuantity(-1); // Kurangi quantity
+    });
+
+    plusBtn.addEventListener('click', function() {
+      adjustQuantity(1); // Tambah quantity
+    });
+  }
+
+  // Memastikan harga total dihitung saat halaman dimuat
+  updateTotalPrice();
 });
 </script>
 @endsection

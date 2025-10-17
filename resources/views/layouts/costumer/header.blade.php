@@ -44,7 +44,11 @@
             </ul>
             <div class="d-flex">
                 <a href="{{ route('customer.keranjang') }}" class="icon-btn"><i class="fas fa-shopping-cart"></i></a>
+                @guest
+                <a href="{{ route('login') }}" class="icon-btn"><i class="far fa-user"></i></a>
+                @else
                 <a href="{{ route('customer.akun') }}" class="icon-btn"><i class="far fa-user"></i></a>
+                @endguest
             </div>
         </div>
     </div>
@@ -56,9 +60,6 @@
             <div class="col-12 col-md-6 mb-2 mb-md-0">
                 <a href="{{ route('lacak.pesanan') }}" style="text-decoration: none; color: black;">
                     <span class="me-4"><i class="fas fa-map-marker-alt"></i> Lacak Pesanan</span>
-                </a>
-                <a href="{{ route('customer.customer_service') }}" style="text-decoration: none; color: black;">
-                    <span><i class="fas fa-headphones"></i> Dukungan Pelanggan</span>
                 </a>
             </div>
             <div class="col-12 col-md-6">

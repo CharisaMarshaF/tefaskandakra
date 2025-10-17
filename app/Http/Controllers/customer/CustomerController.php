@@ -73,14 +73,14 @@ class CustomerController extends Controller
 
 
     public function jurusan($id)
-    {
-        $produk = Produk::with('jurusan')
-            ->where('id_jurusan', $id)
-            ->where('status', 'aktif')
-            ->get();
+{
+    $produk = Produk::with('jurusan')
+        ->where('id_jurusan', $id)
+        ->where('status', 'aktif')
+        ->get();
 
-        return view('customer.jurusan', compact('produk'));
-    }
+    return view('customer.jurusan', compact('produk'));
+}
 
     public function kontak()
     {
@@ -341,7 +341,7 @@ public function destroy($id)
     $jumlah = $request->input('quantity', 1);
 
     $keranjang = Keranjang::where('user_id', $userId)
-        ->where('produk_id', $id)
+        ->where('id_produk', $id)
         ->first();
 
     if ($keranjang) {
@@ -351,7 +351,7 @@ public function destroy($id)
     } else {
         Keranjang::create([
             'user_id' => $userId,
-            'produk_id' => $id,
+            'id_produk' => $id,
             'quantity' => $jumlah,
         ]);
     }
@@ -405,9 +405,47 @@ public function destroy($id)
     
         return view('customer.checkout', compact('keranjang'));
     }
+
+    public function updateQuantityAndPrice(Request $request, $id)
+{
+    // Find the cart item
+    $item = Keranjang::findOrFail($id);
+
+    // Update the quantity based on the action (plus or minus)
+    if ($request->action === 'plus') {
+        $item->quantity += 1;
+    } elseif ($request->action === 'minus' && $item->quantity > 1) {
+        $item->quantity -= 1;
+    }
+
+    // Save the updated item
+    $item->save();
+
+    // Recalculate the total price
+    $produk = $item->produk;
+    $updatedSubtotal = $produk->harga * $item->quantity;
+
+    // Update the total price for the cart
+    $item->total_harga = $updatedSubtotal;
+    $item->save();
+
+    // Optionally, update the order's total price
+    $order = Order::where('id_user', Auth::id())->where('status', 'pending')->first();
+    if ($order) {
+        $total = 0;
+        foreach ($order->orderItems as $orderItem) {
+            $total += $orderItem->subtotal;
+        }
+        $order->update(['total' => $total]);
+    }
+
+    // Return to the cart page with the updated details
+    return redirect()->route('customer.keranjang');
+}
+
     
     
-    public function prosesCheckout(Request $request)
+public function prosesCheckout(Request $request)
 {
     $userId = Auth::id();
 
@@ -418,21 +456,22 @@ public function destroy($id)
         'total' => 0,
         'status' => 'pending'
     ]);
-    
-    
 
     $items = collect();
 
-    if ($request->has('produk_id')) {
+    if ($request->has('id_produk')) {
         // ✅ Checkout 1 produk saja (dari tombol Beli Sekarang)
-        $produk = Produk::findOrFail($request->produk_id);
-        $qty = $request->quantity ?? 1;
+        $produk = Produk::findOrFail($request->id_produk);
+        $qty = $request->quantity ?? 1;  // Ambil quantity yang dikirim dari form
+        $totalHarga = $request->total_harga ?? $produk->harga;  // Ambil total harga yang dikirim dari form
 
         $items->push((object)[
             'produk' => $produk,
-            'quantity' => $qty
+            'quantity' => $qty,
+            'total_harga' => $totalHarga
         ]);
     } else {
+        // Checkout dari keranjang
         $items = Keranjang::with('produk')
             ->where('user_id', $userId)
             ->get();
@@ -444,6 +483,7 @@ public function destroy($id)
         $subtotal = $item->produk->harga * $item->quantity;
         $total += $subtotal;
 
+        // Pastikan order_item disimpan dengan harga dan quantity yang benar
         OrderItem::create([
             'id_order' => $order->id,
             'id_produk' => $item->produk->id,
@@ -457,75 +497,103 @@ public function destroy($id)
     $order->update(['total' => $total]);
 
     // Hapus keranjang hanya kalau checkout dari keranjang
-    if (!$request->has('produk_id')) {
+    if (!$request->has('id_produk')) {
         Keranjang::where('user_id', $userId)->delete();
     }
 
+    // Redirect ke halaman pembayaran
     return redirect()->route('customer.payment', ['order' => $order->id]);
-
 }
 
-    
 // Halaman metode pembayaran
 public function payment($orderId)
 {
     $order = Order::with('items')->findOrFail($orderId);
+    
+    // Fetch the logged-in user data
+    $user = Auth::user();
 
-    // Ambil data item + produk terkait
+    // Fetch items related to the order, including product data and photos
     $items = $order->items()
-    ->join('produks', 'produks.id', '=', 'order_items.id_produk')
-    ->leftJoin('fotos', 'fotos.id', '=', 'produks.id_foto') // ambil foto dari tabel fotos
-    ->select(
-        'produks.nama_produk',
-        'fotos.foto as foto',
-        'order_items.qty',
-        'order_items.subtotal'
-        
-    )
-    ->get();
-
+        ->join('produks', 'produks.id', '=', 'order_items.id_produk')
+        ->leftJoin('fotos', 'fotos.id', '=', 'produks.id_foto') // Get the photo from the 'fotos' table
+        ->select(
+            'produks.nama_produk',
+            'fotos.foto as foto',
+            'order_items.qty',
+            'order_items.subtotal'
+        )
+        ->get();
 
     $total = $order->total;
 
-    return view('customer.payment', compact('order', 'items', 'total'));
+    // Pass order data, items, total, and user data to the payment view
+    return view('customer.payment', compact('order', 'items', 'total', 'user'));
 }
+
 public function pay(Request $request)
 {
+    // Validasi input
     $request->validate([
         'order_id' => 'required|exists:orders,id',
         'payment_method' => 'required',
+        'receipt_image' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Optional file validation
     ]);
 
-    $order = Order::find($request->order_id);
-    if (!$order) {
-        return response()->json(['success' => false, 'message' => 'Order tidak ditemukan.']);
+    try {
+        $order = Order::find($request->order_id);
+        if (!$order) {
+            return redirect()->back()->with('error', 'Order tidak ditemukan.');
+        }
+
+        // Handle file upload if available
+        $filePath = null;
+        if ($request->hasFile('receipt_image')) {
+            $file = $request->file('receipt_image');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $filePath = $file->storeAs('receipts', $fileName, 'public'); // Store file in 'storage/app/public/receipts'
+            
+            // Save the file record in the database
+            $fileRecord = File::create([
+                'nama_file' => $fileName,
+                'file_type' => $file->getClientOriginalExtension(),
+                'uploaded_at' => now(),
+                'file_path' => $filePath,
+            ]);
+        }
+
+        // Simpan data pembayaran
+        $payment = Payment::create([
+            'id_order' => $order->id,
+            'metode' => $request->payment_method,
+            'amount' => $order->total,
+            'bukti_file_id' => $fileRecord->id ?? null, // Save the file ID if a file was uploaded
+            'verified_by' => Auth::id(),
+            'status' => 'pending',
+        ]);
+
+        // Update status pesanan
+        $order->update(['status' => 'pending']);
+
+        // Redirect ke halaman Lacak Pesanan setelah sukses
+        return redirect()->route('lacak.pesanan')->with('success', 'Pembayaran berhasil! Pesanan Anda sedang diproses.');
+
+    } catch (\Exception $e) {
+        // If something goes wrong, flash an error message
+        return redirect()->back()->with('error', 'Terjadi kesalahan saat memproses pembayaran. Silakan coba lagi.');
     }
-
-    Payment::create([
-        'id_order' => $order->id,
-        'metode' => $request->payment_method,
-        'amount' => $order->total,
-        'bukti_file_id' => null,
-        'verified_by' => Auth::id(),
-        'status' => 'pending',
-    ]);
-
-    $order->update(['status' => 'pending']);
-
-    return response()->json(['success' => true]);
 }
 public function lacakPesanan()
 {
-    $orders = Order::with('items.produk')
-        ->where('id_user', Auth::id())
-        ->orderBy('created_at', 'desc')
-        ->get()
-        ->map(function ($order) {
-            // tambahkan estimasi tanpa ubah tabel
-            $order->estimasi_pengiriman = $order->created_at->addDays(3);
-            return $order;
-        });
+    // Ambil pesanan terbaru dari pengguna yang sedang login
+    $orders = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->get();
 
+    // Mengambil semua item pesanan terkait
+    foreach ($orders as $order) {
+        $order->items = $order->items()->with('produk')->get();
+    }
+
+    // Kirim data orders dan items ke view
     return view('customer.lacak_pesanan', compact('orders'));
 }
 

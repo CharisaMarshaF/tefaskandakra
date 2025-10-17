@@ -2,32 +2,34 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
-
     protected $table = 'orders';
-
     protected $fillable = [
         'order_no',
         'id_user',
         'total',
         'shipping_address',
-        'status',
+        'status'
     ];
 
-    public function items()
-    {
-        // relasi dari orders → order_items (id_order)
-        return $this->hasMany(OrderItem::class, 'id_order');
+    public function order(){
+        return $this->hasMany(Pemesanan::class,'id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class,'id_user','id');
     }
 
-    public function user()
+    public function shipment()
     {
-        // relasi dari orders → users (id_user)
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->hasOne(Shipment::class, 'id_order'); // Use 'id_order' as the foreign key
     }
+
+    public function items(){
+        return $this->belongsTo(Pemesanan::class,'id');
+    }
+
+
 }

@@ -61,6 +61,10 @@
                     
                         <button type="submit" class="btn btn-submit">SAVE</button>
                     </form>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger mt-3 w-30">Logout</button>
+                        </form>
 
                     <!-- Tempat alert -->
                     <div id="alertBox" class="mt-3"></div>

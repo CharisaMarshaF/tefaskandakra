@@ -20,7 +20,7 @@ class RoleMiddleware
 
         // Jika role tidak termasuk dalam list yang diizinkan
         if (!in_array($userRole, $roles)) {
-            return redirect('/unauthorized')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+            return redirect('/login')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }
 
         return $next($request);

@@ -34,9 +34,7 @@ use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
 use App\Http\Controllers\Guru\DashboardController as DashboardTeacherController;
 
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [CustomerController::class, 'landingPage']);
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');

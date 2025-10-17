@@ -2,24 +2,28 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\MitraController;
 use App\Http\Controllers\Guru\TeacherController;
+use App\Http\Controllers\Admin\JurusanController;
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Siswas\SiswasController;
+use App\Http\Controllers\Siswa\DashboardController;
 use App\Http\Controllers\waka\SertifikatController;
 use App\Http\Controllers\Customer\CustomerController;
-use App\Http\Controllers\waka\NilaiProjectController;
-use App\Http\Controllers\OrangTuas\OrangTuaController;
-use App\Http\Controllers\waka\JadwalProduksiTefaController;
-use App\Http\Controllers\waka\JadwalKelasIndustriController;
-use App\Http\Controllers\Guru\DashboardController as DashboardTeacherController;
 
 ///
 
-use App\Http\Controllers\Siswa\DashboardController;
+use App\Http\Controllers\waka\NilaiProjectController;
+use App\Http\Controllers\OrangTuas\OrangTuaController;
 use App\Http\Controllers\Siswa\SiswaProjectController;
 use App\Http\Controllers\Siswa\KelasIndustriController;
 use App\Http\Controllers\Siswa\SiswaNilaiProjectController;
+use App\Http\Controllers\waka\JadwalProduksiTefaController;
+use App\Http\Controllers\waka\JadwalKelasIndustriController;
 use App\Http\Controllers\Siswa\SiswaProjectProgressController;
 use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
+use App\Http\Controllers\Guru\DashboardController as DashboardTeacherController;
 
 
 Route::get('/', function () {
@@ -44,9 +48,25 @@ Route::middleware(['auth', 'role:1'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:2'])->group(function () {
-    Route::get('/dashboard-admin-sekolah', function () {
-        return "Halaman khusus Admin Sekolah";
-    });
+    Route::get('/dashboard-admin-sekolah', [AdminController::class, 'index'])->name('dashboard.admin_sekolah');
+    Route::get('/laporan-admin-sekolah', [AdminController::class, 'laporan'])->name('laporan.admin_sekolah');
+    Route::get('/analisis-admin-sekolah', [AdminController::class, 'analisis'])->name('analisis.admin_sekolah');
+    Route::get('/user-admin-sekolah', [AdminController::class, 'user'])->name('user.admin_sekolah');
+
+    Route::post('/user-admin-sekolah', [AdminController::class, 'store'])->name('user.admin_sekolah.store');
+    Route::get('/user-admin-sekolah/{user}/edit', [AdminController::class, 'edit'])->name('user.admin_sekolah.edit');
+    Route::put('/user-admin-sekolah/{user}', [AdminController::class, 'update'])->name('user.admin_sekolah.update');
+    Route::delete('/user-admin-sekolah/{user}', [AdminController::class, 'destroy'])->name('user.admin_sekolah.destroy');
+
+    Route::get('/jurusan-kelas', [JurusanController::class, 'index'])->name('jurusan.admin_sekolah');
+    Route::post('/jurusan-kelas', [JurusanController::class, 'store'])->name('jurusan.store');
+    Route::get('/jurusan-kelas/{jurusan}/edit', [JurusanController::class, 'edit'])->name('jurusan.edit');
+    Route::put('/jurusan-kelas/{jurusan}', [JurusanController::class, 'update'])->name('jurusan.update');
+    Route::delete('/jurusan-kelas/{jurusan}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
+
+    Route::post('/mitra-dudi', [MitraController::class, 'store'])->name('mitra.store');
+
+    Route::get('/laporan-sistem', [LaporanController::class, 'index'])->name('laporan.admin_sekolah');
 });
 
 Route::middleware(['auth', 'role:3'])->group(function () {

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Factory - Dashboard Orang Tua/Wali Murid</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Trading Factory</div>
+                    <div class="logo-sub">SISTEM MANAJEMEN</div>
+                </div>
+            </a>
+        </div>
+        
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item active">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+            <a href="#" class="menu-item">
+                <i class="bi bi-pencil-square"></i>
+                Nilai & Progress
+            </a>
+            <a href="#" class="menu-item">
+                <i class="bi bi-envelope"></i>
+                Surat Peminjaman
+            </a>
+            <a href="#" class="menu-item">
+                <i class="bi bi-folder"></i>
+                Riwayat Project
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-container">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" placeholder="Search here...">
+            </div>
+            
+            <div class="user-section">
+                <i class="bi bi-bell notification-icon"></i>
+                <div class="user-profile">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <h6>Sukadi</h6>
+                        <small>Orang Tua</small>
+                    </div>
+                    <i class="bi bi-chevron-down ms-2"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <h1 class="page-title">Dashboard Orang Tua / Wali Murid</h1>
+            
+            <!-- Top Cards Grid -->
+            <div class="dashboard-grid">
+                <!-- Student Profile Card -->
+                <div class="card student-profile">
+                    <div class="student-avatar"></div>
+                    <div class="student-name">Nama Murid</div>
+                    <div class="student-info">
+                        Kelas XI RPL - NIPD: 44040<br>
+                        Semester Genap 2024/2025
+                    </div>
+                </div>
+                
+                <!-- Progress Chart Card -->
+                <div class="card progress-section">
+                    <h6>Progress Nilai</h6>
+                    <p style="font-size: 12px; color: #6c757d; margin-bottom: 20px;">Nilai Siswa Selama Projek TEFA</p>
+                    
+                    <div class="chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                    
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color blue"></div>
+                            <span>Pemrograman Web</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color green"></div>
+                            <span>Basis Data</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color red"></div>
+                            <span>Pemrograman Dasar</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color orange"></div>
+                            <span>Jaringan Dasar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="progress-bars">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Sikap dan Kepribadian & Keterampilan</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar progress-blue" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Tingkat Kompetensi</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar progress-purple" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="stat-card">
+                        <div class="stat-header">Total Project</div>
+                        <div class="stat-number">7</div>
+                        <div class="stat-label">Project</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">Selesai</div>
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Project</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Projects Section -->
+            <div class="projects-section">
+                <h3 class="section-title">Project yang sedang dikerjakan.</h3>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">Web E-Commerce</div>
+                        <div class="project-progress-bar">
+                            <div class="project-progress-fill project-progress-green" style="width: 75%;"></div>
+                        </div>
+                        <div class="project-meta">
+                            Progress: 75%<br>
+                            Deadline: 16 Agustus<br>
+                            Student: Bagus
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-title">Perpustakaan</div>
+                        <div class="project-progress-bar">
+                            <div class="project-progress-fill project-progress-blue" style="width: 45%;"></div>
+                        </div>
+                        <div class="project-meta">
+                            Progress: 45%<br>
+                            Deadline: 25 Agustus<br>
+                            Student: Dimas
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist.js"></script>
+</body>
+</html>

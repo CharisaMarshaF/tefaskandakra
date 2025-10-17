@@ -20,7 +20,7 @@ class ProjectMembersTableSeeder extends Seeder
             ],
             [
                 'id_project'  => 1,
-                'id_siswa'    => 3,
+                'id_siswa'    => 2,
                 'role'        => 'Backend Developer',
                 'assigned_at' => now(),
                 'created_at'  => now(),

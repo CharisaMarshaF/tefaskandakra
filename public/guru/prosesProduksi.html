@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Factory - Proses Produksi</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            padding-top: 20px;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .sidebar-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+        
+        .logo-section {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #1e293b;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            margin-right: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-main {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.2;
+        }
+        
+        .logo-sub {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 0;
+            margin: 2px 15px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .menu-item:hover {
+            background-color: #f1f5f9;
+            color: #334155;
+            text-decoration: none;
+            transform: translateX(2px);
+        }
+        
+        .menu-item.active {
+            background: linear-gradient(135deg, #6366f1, #4338ca);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            transform: translateX(4px);
+        }
+        
+        .menu-item.active::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: #6366f1;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            font-size: 16px;
+            width: 20px;
+        }
+        
+        .main-content {
+            margin-left: 260px;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .main-content.sidebar-collapsed {
+            margin-left: 0;
+        }
+        
+        .top-navbar {
+            background: white;
+            padding: 15px 30px;
+            border-bottom: 1px solid #f1f5f9;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .hamburger-btn {
+            background: #6366f1;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .hamburger-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+        
+        .search-container {
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 8px 40px 8px 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .search-container .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .notification-icon {
+            margin-right: 20px;
+            color: #6c757d;
+            font-size: 18px;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            background-color: #6c757d;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .user-info h6 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .user-info small {
+            color: #6c757d;
+            font-size: 12px;
+        }
+        
+        .content-wrapper {
+            padding: 30px;
+            background-color: #f5f5f5;
+        }
+        
+        .page-header {
+            margin-bottom: 30px;
+        }
+        
+        .page-title h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            color: #1a202c;
+        }
+        
+        .add-project-btn {
+            background: linear-gradient(135deg, #6366f1, #4338ca);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .add-project-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin-bottom: 30px;
+        }
+        
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f1f5f9;
+        }
+        
+        .form-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .progress-container {
+            margin-bottom: 20px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #6366f1, #4338ca);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f1f5f9;
+            margin-bottom: 25px;
+        }
+        
+        .filter-controls {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a202c;
+            margin: 0;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .status-active { background: #dbeafe; color: #1e40af; }
+        .status-progress { background: #dcfce7; color: #166534; }
+        .status-urgent { background: #fee2e2; color: #991b1b; }
+        .status-complete { background: #d1fae5; color: #065f46; }
+        
+        .project-meta {
+            color: #6c757d;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        
+        .project-progress {
+            margin-bottom: 15px;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar-project {
+            width: 100%;
+            height: 6px;
+            background: #f1f5f9;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .progress-green { background: linear-gradient(135deg, #10b981, #059669); }
+        .progress-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .form-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .filter-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .content-wrapper {
+                padding: 20px 15px;
+            }
+            
+            .form-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Trading Factory</div>
+                    <div class="logo-sub">SISTEM MANAJEMEN</div>
+                </div>
+            </a>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item">
+                <i class="bi bi-plus"></i>
+                Tambah Project
+            </a>
+            <a href="dashboard.html" class="menu-item">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+            <a href="#" class="menu-item">
+                <i class="bi bi-people-fill"></i>
+                Kelola
+            </a>
+            <a href="nilai.html" class="menu-item">
+                <i class="bi bi-star-fill"></i>
+                Nilai
+            </a>
+            <a href="prosesProduksi.html" class="menu-item active">
+                <i class="bi bi-gear-fill"></i>
+                Produksi
+            </a>
+            <a href="forminput.html" class="menu-item">
+                <i class="bi bi-folder-fill"></i>
+                Project TEFA
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search here...">
+                <i class="bi bi-search search-icon"></i>
+            </div>
+            
+            <div class="user-section">
+                <i class="bi bi-bell notification-icon"></i>
+                <div class="user-profile">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <h6>Sukadi</h6>
+                        <small>Admin Web</small>
+                    </div>
+                    <i class="bi bi-chevron-down ms-2"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h2>Proses Produksi</h2>
+            </div>
+            
+            <!-- Add Project Button -->
+            <button class="add-project-btn">
+                <i class="bi bi-plus"></i> Tambah Project
+            </button>
+
+            <!-- Form Container -->
+            <div class="form-container">
+                <!-- Left Form - Edit Proses Produksi -->
+                <div class="form-card">
+                    <h3 class="form-title">Edit Proses Produksi</h3>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Pilih Target</label>
+                            <select class="form-select">
+                                <option>Pilih target project</option>
+                                <option>Website E-Commerce</option>
+                                <option>Mobile App</option>
+                                <option>PCB Controller</option>
+                                <option>Furniture Kayu</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Tipe / Rancangan</label>
+                            <select class="form-select">
+                                <option>Pilih tipe rancangan</option>
+                                <option>Prototype</option>
+                                <option>Production Ready</option>
+                                <option>Testing Phase</option>
+                                <option>Final Product</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Fase Produksi</label>
+                            <select class="form-select">
+                                <option>Pilih fase produksi</option>
+                                <option>Planning</option>
+                                <option>Development</option>
+                                <option>Testing</option>
+                                <option>Quality Check</option>
+                                <option>Finishing</option>
+                            </select>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Presentasi Progress</span>
+                                <span>45%</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Catatan Progress</label>
+                            <input type="text" class="form-control" placeholder="Masukkan catatan progress">
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            SIMPAN
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Form - Urutan Laporan Hasil Produksi -->
+                <div class="form-card">
+                    <h3 class="form-title">Urutan Laporan Hasil Produksi</h3>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Project</label>
+                            <select class="form-select">
+                                <option>Pilih project untuk laporan</option>
+                                <option>Website E-Commerce</option>
+                                <option>Mobile App Development</option>
+                                <option>PCB Controller Arduino</option>
+                                <option>Custom Furniture</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Tipe / Rancangan</label>
+                            <select class="form-select">
+                                <option>Pilih tipe rancangan</option>
+                                <option>Final Report</option>
+                                <option>Progress Report</option>
+                                <option>Quality Report</option>
+                                <option>Testing Report</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" style="margin-bottom: 40px;">
+                            <label class="form-label">UPLOAD GAMBAR</label>
+                            <div style="border: 2px dashed #e2e8f0; border-radius: 8px; padding: 40px; text-align: center; background: #f8fafc;">
+                                <i class="bi bi-file-earmark-image" style="font-size: 48px; color: #6c757d; margin-bottom: 10px;"></i>
+                                <p style="color: #6c757d; margin: 0;">Klik untuk upload gambar atau drag & drop</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Deskripsi</label>
+                            <input type="text" class="form-control" placeholder="Tulis deskripsi hasil produksi">
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            KIRIM
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-controls">
+                    <input type="text" class="form-control" placeholder="Cari nama project..." id="searchProjects">
+                    <select class="form-select" id="categoryFilter">
+                        <option>Semua Kategori</option>
+                        <option>Web Development</option>
+                        <option>Mobile App</option>
+                        <option>Hardware</option>
+                        <option>Furniture</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                <!-- Project Card 1 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h4 class="project-title">Kasir</h4>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="project-meta">
+                        Project: - <br>
+                        Created: 1 Agustus <br>
+                        Deadline: - <br>
+                        Student: Taufik
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar-project">
+                            <div class="progress-fill progress-blue" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h4 class="project-title">Web E-Commerce</h4>
+                        <span class="status-badge status-progress">Progress</span>
+                    </div>
+                    <div class="project-meta">
+                        Project: - <br>
+                        Created: 15 Agustus <br>
+                        Deadline: 1 Januari <br>
+                        Student: Ahmad
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress-bar-project">
+                            <div class="progress-fill progress-green" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h4 class="project-title">Web E-Commerce</h4>
+                        <span class="status-badge status-urgent">Urgent</span>
+                    </div>
+                    <div class="project-meta">
+                        Project: - <br>
+                        Created: 20 Agustus <br>
+                        Deadline: 5 Agustus <br>
+                        Student: Bagas
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>25%</span>
+                        </div>
+                        <div class="progress-bar-project">
+                            <div class="progress-fill progress-red" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h4 class="project-title">Web E-Commerce</h4>
+                        <span class="status-badge status-urgent">Urgent</span>
+                    </div>
+                    <div class="project-meta">
+                        Project: - <br>
+                        Created: 25 Agustus <br>
+                        Deadline: 10 Agustus <br>
+                        Student: Dimas
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>40%</span>
+                        </div>
+                        <div class="progress-bar-project">
+                            <div class="progress-fill progress-red" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 5 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h4 class="project-title">Web E-Commerce</h4>
+                        <span class="status-badge status-urgent">Urgent</span>
+                    </div>
+                    <div class="project-meta">
+                        Project: - <br>
+                        Created: 30 Agustus <br>
+                        Deadline: 15 Agustus <br>
+                        Student: Eka
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>15%</span>
+                        </div>
+                        <div class="progress-bar-project">
+                            <div class="progress-fill progress-red" style="width: 15%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 6 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h4 class="project-title">Web E-Commerce</h4>
+                        <span class="status-badge status-complete">Complete</span>
+                    </div>
+                    <div class="project-meta">
+                        Project: - <br>
+                        Created: 1 September <br>
+                        Deadline: 20 Agustus <br>
+                        Student: Farid
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress-bar-project">
+                            <div class="progress-fill progress-green" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap 5 JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist
+/umd/bootstrap.bundle.min.js"></script>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('collapsed');
+            sidebarOverlay.classList.toggle('show');
+            mainContent.classList.toggle('sidebar-collapsed');
+        }
+
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+    </script>   
+</body>
+</html>

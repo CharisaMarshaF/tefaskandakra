@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Factory - Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Teaching Factory</div>
+                    <div class="logo-sub">SISTEM MANAJEMEN</div>
+                </div>
+            </a>
+        </div>
+        
+        <button class="add-project-btn">
+            <i class="bi bi-plus me-1"></i> Tambah Project
+        </button>
+        
+        <nav class="sidebar-menu">
+            <a href="dashboard.html" class="menu-item active">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+            <a href="kelola.html" class="menu-item">
+                <i class="bi bi-sliders"></i>
+                Kelola
+            </a>
+            <a href="nilai.html" class="menu-item">
+                <i class="bi bi-star-fill"></i>
+                Nilai
+            </a>
+            <a href="prosesProduksi.html" class="menu-item">
+                <i class="bi bi-gear-fill"></i>
+                Produksi
+            </a>
+            <a href="forminput.html" class="menu-item">
+                <i class="bi bi-folder-fill"></i>
+                Project TEFA
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-container">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" placeholder="Search here...">
+            </div>
+            
+            <div class="user-section">
+                <i class="bi bi-bell notification-icon"></i>
+                <div class="user-profile">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <h6>Sukadi</h6>
+                        <small>Admin Web</small>
+                    </div>
+                    <i class="bi bi-chevron-down ms-2"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <h1 class="page-title">DASHBOARD</h1>
+            
+            <!-- Top Cards Grid -->
+            <div class="dashboard-grid">
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-avatar"></div>
+                    <div class="profile-name">SUKADI</div>
+                    <div class="profile-role">Guru Pemrograman RPL</div>
+                    <div class="profile-nip">NIP: 038847823803874</div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>10</h3>
+                        <p>Siswa Bimbingan</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="bi bi-folder-fill"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>9</h3>
+                        <p>Proyek Aktif</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Grid -->
+            <div class="dashboard-grid">
+                <!-- Notifications Card -->
+                <div class="notifications-card">
+                    <h3 class="notifications-title">Notifikasi Terbaru</h3>
+                    <div class="notification-item">
+                        <div class="notification-dot"></div>
+                        <div class="notification-content">
+                            <p class="notification-text">Project Tefa terbaru</p>
+                            <p class="notification-time">2 menit lalu</p>
+                        </div>
+                        <button class="notification-action">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-dot"></div>
+                        <div class="notification-content">
+                            <p class="notification-text">Update Tugas Tefa</p>
+                            <p class="notification-time">25 menit lalu</p>
+                        </div>
+                        <button class="notification-action">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project Cards -->
+                <div class="project-card">
+                    <h4 class="project-title">Proyek Tefa Terbaru</h4>
+                    <p class="project-description">
+                        Sistem Informasi Perpustakaan Digital<br>
+                        Membuat sistem perpustakaan digital dengan finetik online, peminjaman digital
+                        dan pengembalian otomatis.
+                    </p>
+                    <div class="project-meta">Deadline: 3 hari tersisa</div>
+                </div>
+                
+                <div class="project-card">
+                    <h4 class="project-title">Sistem Informasi Perpustakaan Digital</h4>
+                    <p class="project-description">
+                        Membuat sistem perpustakaan digital dengan finetik online, peminjaman digital
+                        dan pengembalian otomatis.
+                    </p>
+                    <div class="project-meta">Deadline: 5 hari tersisa</div>
+                </div>
+            </div>
+            
+            <!-- Apps Section -->
+            <div class="apps-section">
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <div class="app-info">
+                            <h6>Aplikasi Kasir Toko Modern</h6>
+                            <p>Oleh: App Developer Team</p>
+                            <div class="app-progress">Progress: 65%</div>
+                        </div>
+                        <div class="app-actions">
+                            <button class="btn-view">👁</button>
+                            <button class="btn-download">⬇</button>
+                        </div>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-info">
+                            <h6>Aplikasi Kasir Toko Modern</h6>
+                            <p>Oleh: App Developer Team</p>
+                            <div class="app-progress">Progress: 45%</div>
+                        </div>
+                        <div class="app-actions">
+                            <button class="btn-view">👁</button>
+                            <button class="btn-download">⬇</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sidebar Toggle Functionality
+        let sidebarOpen = true;
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const overlay = document.getElementById('sidebarOverlay');
+            const hamburgerIcon = document.querySelector('#hamburgerBtn i');
+            
+            if (window.innerWidth > 768) {
+                // Desktop behavior
+                sidebarOpen = !sidebarOpen;
+                
+                if (!sidebarOpen) {
+                    sidebar.classList.add('collapsed');
+                    mainContent.classList.add('sidebar-collapsed');
+                    hamburgerIcon.className = 'bi bi-layout-sidebar';
+                } else {
+                    sidebar.classList.remove('collapsed');
+                    mainContent.classList.remove('sidebar-collapsed');
+                    hamburgerIcon.className = 'bi bi-list';
+                }
+            } else {
+                // Mobile behavior
+                const isOpen = sidebar.classList.contains('show');
+                
+                if (!isOpen) {
+                    sidebar.classList.add('show');
+                    overlay.classList.add('show');
+                    hamburgerIcon.className = 'bi bi-x';
+                } else {
+                    sidebar.classList.remove('show');
+                    overlay.classList.remove('show');
+                    hamburgerIcon.className = 'bi bi-list';
+                }
+            }
+        }
+        
+        // Close sidebar when clicking overlay (mobile)
+        document.getElementById('sidebarOverlay').addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                const hamburgerIcon = document.querySelector('#hamburgerBtn i');
+                
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                hamburgerIcon.className = 'bi bi-list';
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const overlay = document.getElementById('sidebarOverlay');
+            const hamburgerIcon = document.querySelector('#hamburgerBtn i');
+            
+            if (window.innerWidth > 768) {
+                // Reset to desktop mode
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                
+                if (sidebarOpen) {
+                    sidebar.classList.remove('collapsed');
+                    mainContent.classList.remove('sidebar-collapsed');
+                    hamburgerIcon.className = 'bi bi-list';
+                } else {
+                    sidebar.classList.add('collapsed');
+                    mainContent.classList.add('sidebar-collapsed');
+                    hamburgerIcon.className = 'bi bi-layout-sidebar';
+                }
+            } else {
+                // Reset to mobile mode
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('sidebar-collapsed');
+                hamburgerIcon.className = 'bi bi-list';
+                sidebarOpen = true;
+            }
+        });
+    </script>
+</body>
+</html>

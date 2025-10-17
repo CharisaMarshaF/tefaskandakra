@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching Factory - Riwayat Project</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+          
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-main">Trading Factory</div>
+                        <div class="logo-sub">SISTEM MANAJEMEN</div>
+                    </div>
+                </a>
+          
+        </div>
+        
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+            <a href="#" class="menu-item">
+                <i class="bi bi-pencil-square"></i>
+                Nilai & Progress
+            </a>
+            <a href="#" class="menu-item">
+                <i class="bi bi-envelope"></i>
+                Surat Peminjaman
+            </a>
+            <a href="#" class="menu-item active">
+                <i class="bi bi-folder"></i>
+                Riwayat Project
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-container">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" placeholder="Search here...">
+            </div>
+            
+            <div class="user-section">
+                <i class="bi bi-bell notification-icon"></i>
+                <div class="user-profile">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <h6>Sukadi</h6>
+                        <small>Orang Tua</small>
+                    </div>
+                    <i class="bi bi-chevron-down ms-2"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <h1 class="page-title">Riwayat Project</h1>
+            
+            <!-- Student Profile -->
+            <div class="student-profile">
+                <div class="student-avatar"></div>
+                <div class="student-info">
+                    <h5>Nama Murid</h5>
+                    <p>Kelas XI RPL - NIPD: 44040<br>Semester Genap 2024/2025</p>
+                </div>
+            </div>
+            
+            <!-- Project List -->
+            <div class="project-list">
+                <!-- Project 1 - Completed -->
+                <div class="project-card completed">
+                    <div class="project-header" style="display: flex; align-items: flex-start;">
+                        <div class="project-indicator indicator-green"></div>
+                        <div class="project-content">
+                            <div class="project-title">
+                                E-Commerce
+                                <span class="status-badge status-selesai">Selesai</span>
+                            </div>
+                            
+                            <div class="project-meta">
+                                <div class="meta-item">
+                                    <div class="meta-label">Mata Pelajaran</div>
+                                    <div>Pemrograman Web</div>
+                                </div>
+                                <div class="meta-item">
+                                    <div class="meta-label">Waktu Selesai</div>
+                                    <div>15 Januari 2024</div>
+                                </div>
+                                <div class="meta-item">
+                                    <div class="meta-label">Nilai</div>
+                                    <div>85 / 100</div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-description">
+                                <div class="description-title">Penjelasan Guru:</div>
+                                <p class="description-text">Membuat project e-commerce yang baik memang sistem e-commerce yang optimal dengan fitur dan keamanan yang terjamin dan dapat dipercaya oleh pengguna.</p>
+                            </div>
+                            
+                            <div class="project-actions">
+                                <button class="btn-download">
+                                    <i class="bi bi-download"></i>
+                                    Download
+                                </button>
+                                <button class="btn-view">
+                                    <i class="bi bi-eye"></i>
+                                    Lihat
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="grade-section">
+                            <div class="grade-letter">B</div>
+                            <div class="grade-info">
+                                Kompetensi: 17 Januari 2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 - In Progress -->
+                <div class="project-card in-progress">
+                    <div class="project-header" style="display: flex; align-items: flex-start;">
+                        <div class="project-indicator indicator-blue"></div>
+                        <div class="project-content">
+                            <div class="project-title">
+                                E-Commerce
+                                <span class="status-badge status-progress">Sedang Dikerjakan</span>
+                            </div>
+                            
+                            <div class="project-meta">
+                                <div class="meta-item">
+                                    <div class="meta-label">Mata Pelajaran</div>
+                                    <div>Pemrograman Web</div>
+                                </div>
+                                <div class="meta-item">
+                                    <div class="meta-label">Waktu Selesai</div>
+                                    <div>20 Februari 2024</div>
+                                </div>
+                                <div class="meta-item">
+                                    <div class="meta-label">Progress</div>
+                                    <div>75%</div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                                    <div style="font-weight: 500; color: #374151; font-size: 14px;">Backend Development</div>
+                                    <div style="background: #10b981; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">Selesai</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                                    <div style="font-weight: 500; color: #374151; font-size: 14px;">Frontend Development</div>
+                                    <div style="background: #f59e0b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">Progress</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                                    <div style="font-weight: 500; color: #374151; font-size: 14px;">Database Development</div>
+                                    <div style="background: #10b981; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">Selesai</div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-actions">
+                                <button class="btn-view">
+                                    <i class="bi bi-eye"></i>
+                                    Lihat Progress
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 - Completed -->
+                <div class="project-card completed">
+                    <div class="project-header" style="display: flex; align-items: flex-start;">
+                        <div class="project-indicator indicator-green"></div>
+                        <div class="project-content">
+                            <div class="project-title">
+                                E-Commerce
+                                <span class="status-badge status-selesai">Selesai</span>
+                            </div>
+                            
+                            <div class="project-meta">
+                                <div class="meta-item">
+                                    <div class="meta-label">Mata Pelajaran</div>
+                                    <div>Pemrograman Web</div>
+                                </div>
+                                <div class="meta-item">
+                                    <div class="meta-label">Waktu Selesai</div>
+                                    <div>10 Desember 2023</div>
+                                </div>
+                                <div class="meta-item">
+                                    <div class="meta-label">Nilai</div>
+                                    <div>85 / 100</div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-description">
+                                <div class="description-title">Penjelasan Guru:</div>
+                                <p class="description-text">Membuat project e-commerce hasil yang bagus dengan sistem toko online yang mudah digunakan pada E-Commerce yang menggunakan PHP dan Database MySQL bagus untuk project siswa.</p>
+                            </div>
+                            
+                            <div class="project-actions">
+                                <button class="btn-download">
+                                    <i class="bi bi-download"></i>
+                                    Download
+                                </button>
+                                <button class="btn-view">
+                                    <i class="bi bi-eye"></i>
+                                    Lihat
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="grade-section">
+                            <div class="grade-letter">B</div>
+                            <div class="grade-info">
+                                Kompetensi: 12 Januari 2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="../dist.js"></script>
+</body>
+</html>    

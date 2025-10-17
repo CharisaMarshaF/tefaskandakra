@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Factory - Manajemen Stok Barang</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Trading Factory</div>
+                    <div class="logo-sub">SISTEM MANAJEMEN</div>
+                </div>
+            </a>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="dasboard.html" class="menu-item">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+            <a href="produk.html" class="menu-item">
+                <i class="bi bi-box-seam"></i>
+                Produk TEFA
+            </a>
+            <a href="stok.html" class="menu-item active">
+                <i class="bi bi-archive-fill"></i>
+                Stok Bahan
+            </a>
+            <a href="pemesanan.html" class="menu-item">
+                <i class="bi bi-cart-fill"></i>
+                Pemesanan
+            </a>
+            <a href="pembayaran.html" class="menu-item">
+                <i class="bi bi-credit-card-fill"></i>
+                Pembayaran
+            </a>
+            <a href="produksi.html" class="menu-item">
+                <i class="bi bi-gear-fill"></i>
+                Produksi
+            </a>
+            <a href="pengiriman.html" class="menu-item">
+                <i class="bi bi-truck"></i>
+                Pengiriman
+            </a>
+            <a href="siswaguru.html" class="menu-item">
+                <i class="bi bi-people-fill"></i>
+                Siswa & Guru
+            </a>
+            <a href="customer.html" class="menu-item">
+                <i class="bi bi-headset"></i>
+                CS
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-container">
+                <input type="text" placeholder="search here...">
+                <i class="bi bi-search search-icon"></i>
+            </div>
+            
+            <div class="user-section">
+                <i class="bi bi-bell notification-icon"></i>
+                <div class="user-profile">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <h6>Sukadi</h6>
+                        <small>Admin Web</small>
+                    </div>
+                    <i class="bi bi-chevron-down ms-2"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h2>Manajemen Stok Barang</h2>
+                    <p>Kelola Inventori bahan baku untuk produksi TEFA</p>
+                </div>
+                <div class="header-buttons">
+                    <button class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-up-short"></i> Stok Masuk/Keluar
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Tambah Bahan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="bi bi-box"></i>
+                    </div>
+                    <div class="stat-value">5</div>
+                    <p class="stat-label">Total Bahan</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                    </div>
+                    <div class="stat-value">1</div>
+                    <p class="stat-label">Stok Kritis</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="stat-value">4</div>
+                    <p class="stat-label">Supplier Aktif</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div class="stat-value">1</div>
+                    <p class="stat-label">Pergerakan Hari Ini</p>
+                </div>
+            </div>
+
+            <!-- Critical Alert -->
+            <div class="critical-alert">
+                <i class="bi bi-exclamation-triangle-fill alert-icon"></i>
+                <p class="alert-text">
+                    <strong>Peringatan Stok Kritis!</strong>
+                    Ada 1 bahan dengan stok sangat rendah yang perlu diisi ulang
+                </p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" id="inventoryTab" onclick="switchTab('inventory')">Daftar Barang</button>
+                    <button class="filter-tab" id="movementTab" onclick="switchTab('movement')">Pergerakan Stok</button>
+                </div>
+                <div class="filter-controls">
+                    <input type="text" placeholder="Cari bahan...">
+                    <select>
+                        <option>Semua Kategori</option>
+                        <option>Tekstil</option>
+                        <option>Logam</option>
+                        <option>Elektronik</option>
+                    </select>
+                    <select>
+                        <option>Semua Status</option>
+                        <option>Normal</option>
+                        <option>Kritis</option>
+                        <option>Warning</option>
+                    </select>
+                    <div></div>
+                </div>
+            </div>
+
+            <!-- Inventory Table -->
+            <div class="inventory-section">
+                <div class="inventory-header">
+                    <h5 id="tableTitle">Inventori Bahan Baku</h5>
+                    <p id="tableSubtitle">Daftar lengkap bahan baku dan status stok terkini</p>
+                </div>
+                
+                <!-- Inventory Table -->
+                <div class="table-container inventory-table-wrapper" id="inventoryTableWrapper">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Bahan</th>
+                                <th>Kategori</th>
+                                <th>Stok Saat Ini</th>
+                                <th>Status</th>
+                                <th>Harga Satuan</th>
+                                <th>Supplier</th>
+                                <th>Terakhir di isi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kain Katun Premium</td>
+                                <td>Tekstil</td>
+                                <td>
+                                    <div class="stock-info">
+                                        <span class="stock-current">50 meter</span>
+                                        <span class="stock-min">Min. 200</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-normal">Normal</span></td>
+                                <td class="price-cell">Rp 25,000</td>
+                                <td>CV. Tekstil Jaya</td>
+                                <td>2025-01-10</td>
+                                <td class="action-cell">
+                                    <button class="action-menu" onclick="toggleDropdown(this)">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <div class="action-dropdown">
+                                        <a href="#" class="dropdown-item edit">
+                                            <i class="bi bi-pencil-square"></i>
+                                            Edit
+                                        </a>
+                                        <a href="#" class="dropdown-item detail">
+                                            <i class="bi bi-eye"></i>
+                                            Detail
+                                        </a>
+                                        <a href="#" class="dropdown-item delete">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Besi Plat 2mm</td>
+                                <td>Logam</td>
+                                <td>
+                                    <div class="stock-info">
+                                        <span class="stock-current">5 lembar</span>
+                                        <span class="stock-min">Min. 50</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-kritis">Kritis</span></td>
+                                <td class="price-cell">Rp 45,000</td>
+                                <td>PT. Metal Works</td>
+                                <td>2025-01-06</td>
+                                <td class="action-cell">
+                                    <button class="action-menu" onclick="toggleDropdown(this)">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <div class="action-dropdown">
+                                        <a href="#" class="dropdown-item edit">
+                                            <i class="bi bi-pencil-square"></i>
+                                            Edit
+                                        </a>
+                                        <a href="#" class="dropdown-item detail">
+                                            <i class="bi bi-eye"></i>
+                                            Detail
+                                        </a>
+                                        <a href="#" class="dropdown-item delete">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Resistor 10K Ohm</td>
+                                <td>Elektronik</td>
+                                <td>
+                                    <div class="stock-info">
+                                        <span class="stock-current">800 pcs</span>
+                                        <span class="stock-min">Min. 1000</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-normal">Normal</span></td>
+                                <td class="price-cell">Rp 500</td>
+                                <td>Toko Elektronik</td>
+                                <td>2025-01-12</td>
+                                <td class="action-cell">
+                                    <button class="action-menu" onclick="toggleDropdown(this)">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <div class="action-dropdown">
+                                        <a href="#" class="dropdown-item edit">
+                                            <i class="bi bi-pencil-square"></i>
+                                            Edit
+                                        </a>
+                                        <a href="#" class="dropdown-item detail">
+                                            <i class="bi bi-eye"></i>
+                                            Detail
+                                        </a>
+                                        <a href="#" class="dropdown-item delete">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Benang Polyester</td>
+                                <td>Tekstil</td>
+                                <td>
+                                    <div class="stock-info">
+                                        <span class="stock-current">25 gulung</span>
+                                        <span class="stock-min">Min. 100</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-warning">Warning</span></td>
+                                <td class="price-cell">Rp 8,500</td>
+                                <td>CV. Tekstil Jaya</td>
+                                <td>2025-01-8</td>
+                                <td class="action-cell">
+                                    <button class="action-menu" onclick="toggleDropdown(this)">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <div class="action-dropdown">
+                                        <a href="#" class="dropdown-item edit">
+                                            <i class="bi bi-pencil-square"></i>
+                                            Edit
+                                        </a>
+                                        <a href="#" class="dropdown-item detail">
+                                            <i class="bi bi-eye"></i>
+                                            Detail
+                                        </a>
+                                        <a href="#" class="dropdown-item delete">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Aluminium Sheet</td>
+                                <td>Logam</td>
+                                <td>
+                                    <div class="stock-info">
+                                        <span class="stock-current">50 lembar</span>
+                                        <span class="stock-min">Min. 75</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-normal">Normal</span></td>
+                                <td class="price-cell">Rp 35,000</td>
+                                <td>PT. Alumindo</td>
+                                <td>2025-01-11</td>
+                                <td class="action-cell">
+                                    <button class="action-menu" onclick="toggleDropdown(this)">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <div class="action-dropdown">
+                                        <a href="#" class="dropdown-item edit">
+                                            <i class="bi bi-pencil-square"></i>
+                                            Edit
+                                        </a>
+                                        <a href="#" class="dropdown-item detail">
+                                            <i class="bi bi-eye"></i>
+                                            Detail
+                                        </a>
+                                        <a href="#" class="dropdown-item delete">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Movement Table -->
+                <div class="table-container movement-table" id="movementTableWrapper">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Bahan</th>
+                                <th>Tipe</th>
+                                <th>Jumlah</th>
+                                <th>Referensi</th>
+                                <th>Catatan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2025-01-10</td>
+                                <td>Kain Katun Premium</td>
+                                <td><span class="status-badge status-masuk">Masuk</span></td>
+                                <td>100</td>
+                                <td>PO-001</td>
+                                <td>Pembelian bulanan</td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-10</td>
+                                <td>Resistor 10K Ohm</td>
+                                <td><span class="status-badge status-keluar">Keluar</span></td>
+                                <td>50</td>
+                                <td>PROD-025</td>
+                                <td>Untuk produksi PCB Controller</td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-09</td>
+                                <td>Besi Plat 2mm</td>
+                                <td><span class="status-badge status-keluar">Keluar</span></td>
+                                <td>3</td>
+                                <td>PROD-26</td>
+                                <td>Produksi komponen mesin</td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-08</td>
+                                <td>Benang Polyester</td>
+                                <td><span class="status-badge status-masuk">Masuk</span></td>
+                                <td>25</td>
+                                <td>PO-002</td>
+                                <td>Restok bahan tekstil</td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-07</td>
+                                <td>Aluminium Sheet</td>
+                                <td><span class="status-badge status-keluar">Keluar</span></td>
+                                <td>10</td>
+                                <td>PROD-27</td>
+                                <td>Pembuatan frame prototype</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist.js"></script>
+</body>
+</html>

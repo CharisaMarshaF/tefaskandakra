@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Sistem - Teaching Factory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+     <!-- Bootstrap 5 CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Bootstrap Icons -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="d-flex">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-main">Trading Factory</div>
+                        <div class="logo-sub">SISTEM MANAJEMEN</div>
+                    </div>
+                </a>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item ">
+                    <i class="bi bi-grid-1x2-fill"></i>
+                    Dashboard
+                </a>
+                <a href="users.html" class="menu-item ">
+                    <i class="bi bi-people"></i>
+                    Users
+                </a>
+                <a href="Analisis.html" class="menu-item">
+                    <i class="bi bi-eye"></i>
+                    Analystic & Reports
+                </a>
+                <a href="laporan.html" class="menu-item active">
+                    <i class="bi bi-folder"></i>
+                    Laporan
+                </a>
+            </nav>
+        </div>
+        <div class="main-content flex-grow-1 p-4" style="margin-left: 280px;">
+            <nav class="navbar navbar-expand-lg bg-white rounded-4 shadow-sm mb-4">
+                <div class="container-fluid">
+                    <button class="btn d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-collapse" aria-controls="sidebar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa-solid fa-bars fs-5"></i>
+                    </button>
+                    <div class="input-group me-3 d-none d-md-flex" style="max-width: 400px;">
+                        <span class="input-group-text bg-transparent border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0 custom-input" placeholder="Search here ...">
+                    </div>
+                    <div class="d-flex align-items-center ms-auto">
+                        <div class="position-relative me-4">
+                            <i class="fa-solid fa-bell fs-5 text-secondary"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">1</span>
+                        </div>
+                        <div class="dropdown">
+                            <a class="d-flex align-items-center text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://i.ibb.co/L8y2wVp/avatar.png" alt="User Avatar" class="rounded-circle me-2" width="40" height="40">
+                                <div class="d-none d-md-block">
+                                    <div class="fw-semibold text-dark">Sukadi</div>
+                                    <small class="text-muted">Guru</small>
+                                </div>
+                                <i class="fa-solid fa-chevron-down ms-2 text-muted"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="content-card p-4 p-md-5">
+                <h1 class="fs-3 fw-bold text-dark mb-1">Laporan Sistem</h1>
+                <p class="text-muted mb-4">Monitor aktivasi dan performa sistem sekolah</p>
+                
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="icon-circle me-3"><i class="fa-solid fa-users fs-5"></i></div>
+                            <div>
+                                <p class="mb-0 text-muted">Total Login Hari ini</p>
+                                <h4 class="fw-bold mb-0">124</h4>
+                                <small class="text-success"><i class="fa-solid fa-caret-up"></i> +12%</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="info-card green d-flex align-items-center">
+                            <div class="icon-circle me-3"><i class="fa-solid fa-user-check fs-5"></i></div>
+                            <div>
+                                <p class="mb-0 text-muted">User Aktif</p>
+                                <h4 class="fw-bold mb-0">94</h4>
+                                <small class="text-success"><i class="fa-solid fa-caret-up"></i> +5%</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="info-card red d-flex align-items-center">
+                            <div class="icon-circle me-3"><i class="fa-solid fa-money-bill fs-5"></i></div>
+                            <div>
+                                <p class="mb-0 text-muted">Total Transaksi</p>
+                                <h4 class="fw-bold mb-0">1,245</h4>
+                                <small class="text-success"><i class="fa-solid fa-caret-up"></i> +23%</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="info-card orange d-flex align-items-center">
+                            <div class="icon-circle me-3"><i class="fa-solid fa-arrow-up fs-5"></i></div>
+                            <div>
+                                <p class="mb-0 text-muted">Uptime Sistem</p>
+                                <h4 class="fw-bold mb-0">99.9%</h4>
+                                <small class="text-success"><i class="fa-solid fa-check"></i> Stabil</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs mb-4" id="reportTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="analitik-tab" data-bs-toggle="tab" data-bs-target="#analitik" type="button" role="tab" aria-controls="analitik" aria-selected="true">Analitik</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="log-aktivitas-tab" data-bs-toggle="tab" data-bs-target="#log-aktivitas" type="button" role="tab" aria-controls="log-aktivitas" aria-selected="false">Log Aktivitas</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="reportTabsContent">
+                    <div class="tab-pane fade show active" id="analitik" role="tabpanel" aria-labelledby="analitik-tab">
+                        <div class="row g-4">
+                            <div class="col-lg-7">
+                                <div class="content-card p-4">
+                                    <h5 class="fw-bold mb-3">Login Harian (7 Hari Terakhir)</h5>
+                                    <p class="text-muted mb-4">Jumlah login per hari dalam seminggu terakhir</p>
+                                    <img src="https://i.ibb.co/3s6hB8w/chart-line.png" alt="Login Chart" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="content-card p-4">
+                                    <h5 class="fw-bold mb-3">Aktivitas User by Role</h5>
+                                    <p class="text-muted mb-4">Distribusi aktivitas berdasarkan peran pengguna</p>
+                                    <img src="https://i.ibb.co/P4h8sJ8/pie-chart.png" alt="Pie Chart" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4 mt-4">
+                            <div class="col-12">
+                                <div class="content-card p-4">
+                                    <h5 class="fw-bold mb-3">Ringkasan Penggunaan Sistem</h5>
+                                    <p class="text-muted mb-4">Statistika lengkap penggunaan sistem dalam periode ini</p>
+                                    <div class="row text-center">
+                                        <div class="col-md-3">
+                                            <p class="mb-0 text-muted">Total Sesi</p>
+                                            <h4 class="fw-bold">1,847</h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="mb-0 text-muted">Pages Views</p>
+                                            <h4 class="fw-bold">15,432</h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="mb-0 text-muted">Error Rate</p>
+                                            <h4 class="fw-bold">0.3%</h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="mb-0 text-muted">Rata-rata Durasi</p>
+                                            <h4 class="fw-bold">24 menit</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="log-aktivitas" role="tabpanel" aria-labelledby="log-aktivitas-tab">
+                        <div class="content-card p-4">
+                            <h5 class="fw-bold mb-3">Log Aktivitas User</h5>
+                            <p class="text-muted mb-4">Riwayat aktivitas terbaru dari semua pengguna sistem</p>
+                            
+                            <div class="card log-item p-3 mb-3 success">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3 fs-5 text-muted"><i class="fa-solid fa-user-circle"></i></div>
+                                    <div class="flex-grow-1">
+                                        <p class="fw-semibold mb-0">Ahmad Fauzi</p>
+                                        <small class="text-muted">Login ke sistem <br> <i class="fa-solid fa-calendar-alt"></i> 2025-07-01 08:36 &bull; <i class="fa-solid fa-globe"></i> 192.168.1.100</small>
+                                    </div>
+                                    <div class="ms-auto badge bg-success text-white">Berhasil</div>
+                                </div>
+                            </div>
+                            <div class="card log-item p-3 mb-3 success">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3 fs-5 text-muted"><i class="fa-solid fa-user-circle"></i></div>
+                                    <div class="flex-grow-1">
+                                        <p class="fw-semibold mb-0">Admin</p>
+                                        <small class="text-muted">Menambahkan user baru Siti Aminah <br> <i class="fa-solid fa-calendar-alt"></i> 2025-07-01 08:31 &bull; <i class="fa-solid fa-globe"></i> 192.168.1.1</small>
+                                    </div>
+                                    <div class="ms-auto badge bg-success text-white">Berhasil</div>
+                                </div>
+                            </div>
+                            <div class="card log-item p-3 mb-3 success">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3 fs-5 text-muted"><i class="fa-solid fa-user-circle"></i></div>
+                                    <div class="flex-grow-1">
+                                        <p class="fw-semibold mb-0">Budi Santoso</p>
+                                        <small class="text-muted">Mengubah data jurusan RPL <br> <i class="fa-solid fa-calendar-alt"></i> 2025-07-01 08:29 &bull; <i class="fa-solid fa-globe"></i> 192.168.1.50</small>
+                                    </div>
+                                    <div class="ms-auto badge bg-success text-white">Berhasil</div>
+                                </div>
+                            </div>
+                            <div class="card log-item p-3 mb-3 failed">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3 fs-5 text-muted"><i class="fa-solid fa-user-circle"></i></div>
+                                    <div class="flex-grow-1">
+                                        <p class="fw-semibold mb-0">Ilham</p>
+                                        <small class="text-muted">Gagal login - password salah <br> <i class="fa-solid fa-calendar-alt"></i> 2025-07-01 08:25 &bull; <i class="fa-solid fa-globe"></i> 192.168.1.75</small>
+                                    </div>
+                                    <div class="ms-auto badge bg-danger text-white">Gagal</div>
+                                </div>
+                            </div>
+                            <div class="card log-item p-3 mb-3 success">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3 fs-5 text-muted"><i class="fa-solid fa-user-circle"></i></div>
+                                    <div class="flex-grow-1">
+                                        <p class="fw-semibold mb-0">PT. Industri Maju</p>
+                                        <small class="text-muted">Mengakses data siswa magang <br> <i class="fa-solid fa-calendar-alt"></i> 2025-07-01 08:20 &bull; <i class="fa-solid fa-globe"></i> 204.14.2.100</small>
+                                    </div>
+                                    <div class="ms-auto badge bg-success text-white">Berhasil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZqFqK4/z4SjH5FjT0L5G1x5H5T5o5yF5t5t5f5F5t5s5E5P5t5t5t5t5s5t5" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mengambil semua tombol tab
+            var tabButtons = document.querySelectorAll('#reportTabs button');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Mendapatkan target ID dari tab yang diklik
+                    var targetId = this.getAttribute('data-bs-target');
+                    var targetTab = document.querySelector(targetId);
+
+                    // Menghapus kelas 'active' dan 'show' dari semua tab-pane
+                    document.querySelectorAll('.tab-pane').forEach(tab => {
+                        tab.classList.remove('show', 'active');
+                    });
+
+                    // Menghapus kelas 'active' dari semua tombol tab
+                    document.querySelectorAll('#reportTabs button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+
+                    // Menambahkan kelas 'active' dan 'show' ke tab yang dipilih
+                    this.classList.add('active');
+                    targetTab.classList.add('show', 'active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Factory - Manajemen Stok Barang</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Trading Factory</div>
+                    <div class="logo-sub">SISTEM MANAJEMEN</div>
+                </div>
+            </a>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="dasboard.html" class="menu-item">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+            <a href="produk.html" class="menu-item active">
+                <i class="bi bi-box-seam"></i>
+                Produk TEFA
+            </a>
+            <a href="stok.html" class="menu-item">
+                <i class="bi bi-archive-fill"></i>
+                Stok Bahan
+            </a>
+            <a href="pemesanan.html" class="menu-item">
+                <i class="bi bi-cart-fill"></i>
+                Pemesanan
+            </a>
+            <a href="pembayaran.html" class="menu-item">
+                <i class="bi bi-credit-card-fill"></i>
+                Pembayaran
+            </a>
+            <a href="produksi.html" class="menu-item">
+                <i class="bi bi-gear-fill"></i>
+                Produksi
+            </a>
+            <a href="pengiriman.html" class="menu-item">
+                <i class="bi bi-truck"></i>
+                Pengiriman
+            </a>
+            <a href="siswaguru.html" class="menu-item">
+                <i class="bi bi-people-fill"></i>
+                Siswa & Guru
+            </a>
+            <a href="customer.html" class="menu-item">
+                <i class="bi bi-headset"></i>
+                CS
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-container">
+                <input type="text" placeholder="search here...">
+                <i class="bi bi-search search-icon"></i>
+            </div>
+            
+            <div class="user-section">
+                <i class="bi bi-bell notification-icon"></i>
+                <div class="user-profile">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <h6>Sukadi</h6>
+                        <small>Admin Web</small>
+                    </div>
+                    <i class="bi bi-chevron-down ms-2"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h2>Manajemen Produk TEFA</h2>
+                    <p>Kelola katalog produk TEFA</p>
+                </div>
+                <div class="header-buttons">
+                    <button class="btn btn-outline-secondary">
+                        <i class="bi bi-download"></i> Export Katalog
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Tambah Produk
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="bi bi-box"></i>
+                    </div>
+                    <div class="stat-value">8</div>
+                    <p class="stat-label">Total Produk</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div class="stat-value">5</div>
+                    <p class="stat-label">Produk Aktif</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-value">1</div>
+                    <p class="stat-label">Stok Habis</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <div class="stat-value">4.7</div>
+                    <p class="stat-label">Rating Rata-rata</p>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-bar">
+                <div class="filter-controls" style="grid-template-columns: 2fr 1fr;">
+                    <input type="text" placeholder="Cari produk..." id="searchProducts">
+                    <select id="categoryFilter">
+                        <option>Semua Kategori</option>
+                        <option>Furniture</option>
+                        <option>Elektronik</option>
+                        <option>Tekstil</option>
+                        <option>Kerajinan</option>
+                    </select>
+                </div>
+            </div>
+
+             <!-- Product Grid -->
+            <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                
+                <!-- Product Card 1 -->
+                <div class="product-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; transition: all 0.3s ease;">
+                    <div style="position: relative; height: 200px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <!-- Product Image Placeholder -->
+                        <div style="width: 160px; height: 120px; background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 80px; height: 60px; background: white; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+                                <div style="width: 60px; height: 40px; background: #94a3b8; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                        <!-- Favorite Icon -->
+                        <button style="position: absolute; top: 10px; right: 10px; background: white; border: none; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); cursor: pointer;">
+                            <i class="bi bi-heart" style="color: #6c757d;"></i>
+                        </button>
+                    </div>
+                    
+                    <div style="padding: 15px;">
+                        <h6 style="font-weight: 600; margin: 0 0 5px 0; color: #1a202c; font-size: 14px;">Jemukan Pelubang Stainless Steel</h6>
+                        <div style="font-size: 18px; font-weight: 700; color: #1a202c; margin-bottom: 10px;">Rp. 589,000</div>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <div style="display: flex; color: #fbbf24;">
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                            </div>
+                            <span style="font-size: 12px; color: #6c757d; margin-left: 5px;">(24)</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="status-badge status-completed" style="font-size: 11px; padding: 3px 8px;">Stok Tersedia</span>
+                            <div style="display: flex; gap: 5px;">
+                                <button style="width: 24px; height: 24px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="bi bi-pencil" style="font-size: 10px; color: #6c757d;"></i>
+                                </button>
+                                <button style="width: 24px; height: 24px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="bi bi-trash" style="font-size: 10px; color: #6c757d;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; transition: all 0.3s ease;">
+                    <div style="position: relative; height: 200px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <!-- Product Image Placeholder -->
+                        <div style="width: 160px; height: 120px; background: linear-gradient(135deg, #1f2937, #374151); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 120px; height: 80px; background: #4b5563; border-radius: 4px; position: relative;">
+                                <div style="width: 100%; height: 20px; background: #6b7280; border-radius: 2px 2px 0 0;"></div>
+                                <div style="position: absolute; bottom: 5px; left: 10px; right: 10px; height: 8px; background: #9ca3af; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                        <!-- Favorite Icon -->
+                        <button style="position: absolute; top: 10px; right: 10px; background: white; border: none; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); cursor: pointer;">
+                            <i class="bi bi-heart" style="color: #6c757d;"></i>
+                        </button>
+                    </div>
+                    
+                    <div style="padding: 15px;">
+                        <h6 style="font-weight: 600; margin: 0 0 5px 0; color: #1a202c; font-size: 14px;">Kursi Taman Besi</h6>
+                        <div style="font-size: 18px; font-weight: 700; color: #1a202c; margin-bottom: 10px;">Rp. 189,000</div>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <div style="display: flex; color: #fbbf24;">
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star" style="font-size: 12px; color: #d1d5db;"></i>
+                            </div>
+                            <span style="font-size: 12px; color: #6c757d; margin-left: 5px;">(18)</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="status-badge status-completed" style="font-size: 11px; padding: 3px 8px;">Stok Tersedia</span>
+                            <div style="display: flex; gap: 5px;">
+                                <button style="width: 24px; height: 24px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="bi bi-pencil" style="font-size: 10px; color: #6c757d;"></i>
+                                </button>
+                                <button style="width: 24px; height: 24px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="bi bi-trash" style="font-size: 10px; color: #6c757d;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; transition: all 0.3s ease;">
+                    <div style="position: relative; height: 200px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <!-- Product Image Placeholder -->
+                        <div style="width: 160px; height: 120px; background: linear-gradient(135deg, #f3f4f6, #d1d5db); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 100px; height: 80px; background: white; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: relative;">
+                                <div style="width: 12px; height: 60px; background: #9ca3af; margin: 10px; border-radius: 2px;"></div>
+                                <div style="width: 12px; height: 60px; background: #9ca3af; position: absolute; right: 10px; top: 10px; border-radius: 2px;"></div>
+                                <div style="width: 60px; height: 8px; background: #9ca3af; position: absolute; bottom: 10px; left: 20px; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                        <!-- Favorite Icon -->
+                        <button style="position: absolute; top: 10px; right: 10px; background: white; border: none; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); cursor: pointer;">
+                            <i class="bi bi-heart" style="color: #6c757d;"></i>
+                        </button>
+                    </div>
+                    
+                    <div style="padding: 15px;">
+                        <h6 style="font-weight: 600; margin: 0 0 5px 0; color: #1a202c; font-size: 14px;">Meja Kerja Bengkel</h6>
+                        <div style="font-size: 18px; font-weight: 700; color: #1a202c; margin-bottom: 10px;">Rp. 109,000</div>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <div style="display: flex; color: #fbbf24;">
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 12px;"></i>
+                                <i class="bi bi-star-half" style="font-size: 12px;"></i>
+                            </div>
+                            <span style="font-size: 12px; color: #6c757d; margin-left: 5px;">(32)</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="status-badge status-completed" style="font-size: 11px; padding: 3px 8px;">Stok Tersedia</span>
+                            <div style="display: flex; gap: 5px;">
+                                <button style="width: 24px; height: 24px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="bi bi-pencil" style="font-size: 10px; color: #6c757d;"></i>
+                                </button>
+                                <button style="width: 24px; height: 24px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="bi bi-trash" style="font-size: 10px; color: #6c757d;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist.js"></script>
+</body>
+</html>

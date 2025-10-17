@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teaching Factory</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <style>
+    body {
+      background-color: #f3f6fb;
+    }
+
+    .navbar {
+      background-color: #4b3de0;
+    }
+
+    .category-card,
+    .service-card,
+    .product-card {
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .category-card .list-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .service-card img {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 0.75rem;
+    }
+
+    .card-img-overlay {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    }
+
+    .service-card-title {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .service-card button {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+    }
+
+    .section-title {
+      background-color: #4b3de0;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .product-highlight img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .mini-gallery img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    .btn-outline-light {
+      color: #333;
+    }
+
+    .section-header {
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .bg-rpl {
+      background-color: #16A34A;
+      /* hijau */
+    }
+
+    .bg-tekstil {
+      background-color: #F59E0B;
+      /* oranye */
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      height: 100%;
+    }
+
+    .btn-buy {
+      background-color: #16A34A;
+      color: #fff;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .btn-buy:hover {
+      background-color: #15803d;
+    }
+
+    .btn-product {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .btn-product:hover {
+      background-color: #333;
+    }
+
+    .category-box {
+      background: #fff;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-box .btn {
+      width: 100%;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      background: #f9f9f9;
+    }
+
+    .category-box .btn:hover {
+      background: #e5e5e5;
+    }
+    
+
+    .card-custom {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .btn-beli {
+      border: 1px solid #28a745;
+      color: #28a745;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .btn-beli:hover {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    .section-title {
+      background-color: #f44336;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
+    .service-box {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .service-box img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .service-box span {
+      position: absolute;
+      bottom: 8px;
+      left: 10px;
+      color: white;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 3px 6px;
+      border-radius: 5px;
+    }
+
+    .card-produk {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .card-produk img {
+      border-radius: 10px;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .btn-pesan {
+      background-color: #28a745;
+      color: #fff;
+      font-size: 14px;
+      padding: 3px 8px;
+    }
+
+    .btn-hubungi {
+      background-color: #dc3545;
+      color: #fff;
+      font-size: 14px;
+      padding: 3px 8px;
+    }
+
+    .btn-semua {
+      background-color: #f44336;
+      color: #fff;
+      border-radius: 20px;
+      font-weight: bold;
+      padding: 8px 20px;
+    }
+
+    .footer {
+      background-color: #3c2fc0;
+      color: #fff;
+      padding: 30px 20px;
+    }
+
+    .footer h5 {
+      font-weight: bold;
+    }
+
+    .footer-bottom {
+      background: #111;
+      color: #aaa;
+      font-size: 14px;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .map-container iframe {
+      border: 0;
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+    }
+
+    .footer-left p{
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+<!-- Topbar -->
+<div class="bg-dark text-white small py-1 px-3 d-flex justify-content-between align-items-center">
+  <span>Selamat Datang Di Skanda store.</span>
+  <div>
+    Follow us:
+    <a href="#" class="text-white ms-2"><i class="bi bi-twitter"></i></a>
+    <a href="#" class="text-white ms-2"><i class="bi bi-facebook"></i></a>
+    <a href="#" class="text-white ms-2"><i class="bi bi-pinterest"></i></a>
+    <a href="#" class="text-white ms-2"><i class="bi bi-reddit"></i></a>
+    <a href="#" class="text-white ms-2"><i class="bi bi-youtube"></i></a>
+    <a href="#" class="text-white ms-2"><i class="bi bi-instagram"></i></a>
+  </div>
+</div>
+
+<!-- Navbar utama -->
+<nav class="navbar navbar-expand-lg" style="background-color:4B3EC4;">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand text-white fw-bold" href="#">
+      <img src="logo tefa.png" alt="Logo" height="35" class="me-2">
+    
+    </a>
+
+    <!-- Toggle mobile -->
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link text-white" href="#">Profile</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Jurusan</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Ototronik</a></li>
+            <li><a class="dropdown-item" href="#">Multimedia</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Produk</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Produk 1</a></li>
+            <li><a class="dropdown-item" href="#">Produk 2</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Kontak</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Mitra</a></li>
+      </ul>
+
+      <!-- Ikon kanan -->
+      <div class="d-flex align-items-center gap-3">
+        <a href="#" class="text-white position-relative">
+          <i class="bi bi-cart fs-5"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark">2</span>
+        </a>
+        <a href="#" class="text-white"><i class="bi bi-heart fs-5"></i></a>
+        <a href="#" class="text-white"><i class="bi bi-person fs-5"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Bottom bar -->
+<div class="bg-white py-3 border-bottom">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex gap-4">
+      <span><i class="bi bi-geo-alt me-2"></i>Lacak Pesanan</span>
+      <span><i class="bi bi-headset me-2"></i>Dukungan Pelanggan</span>
+    </div>
+    <!-- Search -->
+    <div class="input-group" style="max-width:400px;">
+      <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+      <input type="text" class="form-control" placeholder="Cari produk .....">
+    </div>
+  </div>
+</div>
+
+  <!-- Main Content -->
+  <div class="container my-4">
+    <div class="row g-4">
+      <!-- Sidebar -->
+      <div class="col-md-3">
+        <div class="card shadow-sm rounded-3 p-3">
+          <h6 class="fw-bold mb-3">Kategori</h6>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-menu-button me-2 text-primary"></i> Kain Lurik</span>
+              <span class="badge bg-primary rounded-pill">1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-menu-button me-2 text-primary"></i> Kain Lurik</span>
+              <span class="badge bg-primary rounded-pill">1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-menu-button me-2 text-primary"></i> Kain Lurik</span>
+              <span class="badge bg-primary rounded-pill">1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-menu-button me-2 text-primary"></i> Kain Lurik</span>
+              <span class="badge bg-primary rounded-pill">1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-menu-button me-2 text-primary"></i> Kain Lurik</span>
+              <span class="badge bg-primary rounded-pill">1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-menu-button me-2 text-primary"></i> Kain Lurik</span>
+              <span class="badge bg-primary rounded-pill">1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-menu-button me-2 text-primary"></i> Kain Lurik</span>
+              <span class="badge bg-primary rounded-pill">1</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="col-md-9">
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <div class="card service-card shadow-sm border-0 overflow-hidden">
+              <img src="rekayasaperangkatlunak.png" class="card-img" alt="">
+              <div class="card-img-overlay d-flex flex-column justify-content-between">
+                <h5 class="text-white fw-bold">Rekayasa Perangkat Lunak</h5>
+                <div>
+                  <button class="btn btn-light btn-sm w-50">PELAYANAN KAMI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card service-card shadow-sm border-0 overflow-hidden">
+              <img src="tekstil.png" class="card-img" alt="">
+              <div class="card-img-overlay d-flex flex-column justify-content-between">
+                <!-- Judul di atas -->
+                <h5 class="text-white fw-bold">Teknik Tekstil</h5>
+                <!-- Tombol di bawah -->
+                <div>
+                  <button class="btn btn-light btn-sm w-50">PELAYANAN KAMI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card service-card shadow-sm border-0 overflow-hidden">
+              <img src="otomotif.png" class="card-img" alt="">
+              <div class="card-img-overlay d-flex flex-column justify-content-between">
+                <h5 class="text-white fw-bold">Teknik Ototronik</h5>
+                <div>
+                  <button class="btn btn-light btn-sm w-50">PELAYANAN KAMI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card service-card shadow-sm border-0 overflow-hidden">
+              <img src="mesin.png" class="card-img" alt="">
+              <div class="card-img-overlay d-flex flex-column justify-content-between">
+                <h5 class="text-white fw-bold">Teknik Mesin</h5>
+                <div>
+                  <button class="btn btn-light btn-sm w-50">PELAYANAN KAMI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Mitra Section -->
+    <div class="card shadow-sm rounded-3 p-3 mt-4">
+      <h6 class="fw-bold mb-3">MITRA DUDI — Teaching Factory</h6>
+      <div class="d-flex flex-wrap justify-content-around align-items-center">
+        <img src="logo-expressa 1.png" class="img-fluid m-2" style="max-height:50px;">
+        <img src="logo-msm 1.png" class="img-fluid m-2" style="max-height:50px;">
+        <img src="NASMOCO 1.png" class="img-fluid m-2" style="max-height:50px;">
+        <img src="logo-expressa 1.png" class="img-fluid m-2" style="max-height:50px;">
+        <img src="logo-msm 1.png" class="img-fluid m-2" style="max-height:50px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Produk Jurusan Mesin -->
+  <div class="container my-5">
+
+    <!-- Judul -->
+    <div class="section-header bg-primary text-white fw-bold py-3 px-4 rounded-top">
+      PRODUK JURUSAN MESIN
+    </div>
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Produk Jurusan Mesin</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-light">
+    
+    <div class="container my-4">
+     
+      <div class="row g-3 p-3 bg-white shadow-sm rounded">
+        <!-- Bagian kiri: gambar produk -->
+        <div class="col-md-5 d-flex">
+          <div class="me-3 d-flex flex-column align-items-center">
+            <img src="jemuran1.png" class="mb-3 img-fluid">
+            <img src="jemuran2.png" class="mb-3 img-fluid">
+            <img src="jemuran3.png" class="img-fluid">
+          </div>
+          <div class="flex-fill text-center position-relative">
+            <span class="badge bg-primary position-absolute top-0 start-0 m-2">Harga Rp. 250.000,-</span>
+            <img src="jemuran.png" class="img-fluid">
+          </div>
+        </div>
+    
+        <!-- Bagian tengah: detail produk -->
+        <div class="col-md-4">
+          <h5>Jemuran Stainless Steel Lipat – TEFA SMK 2 Karanganyar</h5>
+          <h4 class="text-primary fw-bold">Rp. 250.000,-</h4>
+          <ul>
+            <li>Desain kokoh dan tahan</li>
+            <li>Dapat dilipat sehingga hemat ruang</li>
+            <li>Produksi asli siswa TEFA SMK 2 Karanganyar</li>
+          </ul>
+          <button class="btn btn-primary mb-2">GRATIS ONGKIR</button>
+          <div class="mb-1">Terjual : <strong>26 / 50</strong></div>
+          <div class="progress">
+            <div class="progress-bar bg-primary" style="width: 52%;"></div>
+          </div>
+        </div>
+    
+        <!-- Bagian kanan: foto mesin -->
+        <div class="col-md-3">
+          <img src="mesin1.png" class="img-fluid rounded mb-3">
+          <img src="mesin2.png" class="img-fluid rounded mb-3">
+          <img src="mesin3.png" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+    
+    </body>
+    </html>
+    
+
+    <div class="container my-5">
+      <!-- Header -->
+      <div class="section-header bg-primary text-white fw-bold py-3 px-4 rounded-top shadow-sm">
+        HASIL PRODUK JURUSAN MESIN
+      </div>
+    
+      <!-- Konten -->
+      <div class="p-3 bg-white rounded-bottom">
+        <div class="card border-0 p-4">
+          <!-- Grid Produk -->
+          <div class="row row-cols-1 row-cols-md-4 g-4 text-center">
+            
+            <!-- Produk 1 -->
+            <div class="col">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="kursi.png" class="card-img-top img-fluid p-3" alt="Jemuran">
+                <div class="card-body d-flex flex-column">
+                  <p class="mb-1 text-muted small">(100)</p>
+                  <h6>Jemuran Pakaian Stainless Steel</h6>
+                  <h6 class="text-dark fw-bold">Rp. 569.000</h6>
+    
+                  <!-- Label Atas -->
+                  <div class="d-flex justify-content-center flex-wrap gap-1 mb-2">
+                    <span class="badge bg-success-subtle text-success fw-semibold">GRATIS ONGKIR</span>
+                    <span class="badge bg-danger-subtle text-danger fw-semibold">BONUS</span>
+                  </div>
+    
+                  <!-- Label Bawah -->
+                  <div class="mb-2 text-success fw-semibold small">
+                    ✅ Stok Tersedia
+                  </div>
+    
+                  <!-- Slot Foto Kecil -->
+                  <div class="d-flex justify-content-center gap-2 mt-auto">
+                    <img src="kursi.png" alt="Varian 1" class="img-thumbnail" style="width:50px; height:50px; object-fit:cover;">
+                    <img src="meja.png" alt="Varian 2" class="img-thumbnail" style="width:50px; height:50px; object-fit:cover;">
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Produk 2 -->
+            <div class="col">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="rak.png" class="card-img-top img-fluid p-3" alt="Rak">
+                <div class="card-body d-flex flex-column">
+                  <p class="mb-1 text-muted small">(100)</p>
+                  <h6>Rak Sepatu Besi Minimalis</h6>
+                  <h6 class="text-dark fw-bold">Rp. 209.000</h6>
+    
+                  <div class="d-flex justify-content-center flex-wrap gap-1 mb-2">
+                    <span class="badge bg-success-subtle text-success fw-semibold">GRATIS ONGKIR</span>
+                    <span class="badge bg-danger-subtle text-danger fw-semibold">BONUS</span>
+                  </div>
+    
+                  <div class="mb-2 text-success fw-semibold small">
+                    ✅ Stok Tersedia
+                  </div>
+    
+                  <div class="d-flex justify-content-center gap-2 mt-auto">
+                    <img src="rak.png" alt="Varian 1" class="img-thumbnail" style="width:50px; height:50px; object-fit:cover;">
+                    <img src="kursi.png" alt="Varian 2" class="img-thumbnail" style="width:50px; height:50px; object-fit:cover;">
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Produk 3 -->
+            <div class="col">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="meja.png" class="card-img-top img-fluid p-3" alt="Meja">
+                <div class="card-body d-flex flex-column">
+                  <p class="mb-1 text-muted small">(100)</p>
+                  <h6>Meja Kerja Bengkel</h6>
+                  <h6 class="text-dark fw-bold">Rp. 109.000</h6>
+    
+                  <div class="d-flex justify-content-center flex-wrap gap-1 mb-2">
+                    <span class="badge bg-success-subtle text-success fw-semibold">GRATIS ONGKIR</span>
+                    <span class="badge bg-danger-subtle text-danger fw-semibold">BONUS</span>
+                  </div>
+    
+                  <div class="mb-2 text-success fw-semibold small">
+                    ✅ Stok Tersedia
+                  </div>
+    
+                  <div class="d-flex justify-content-center gap-2 mt-auto">
+                    <img src="meja.png" alt="Varian 1" class="img-thumbnail" style="width:50px; height:50px; object-fit:cover;">
+                    <img src="jemuran.png" alt="Varian 2" class="img-thumbnail" style="width:50px; height:50px; object-fit:cover;">
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Produk 4 -->
+            <div class="col">
+              <div class="card h-100 border-0 shadow-sm">
+                <img src="kursi.png" class="card-img-top img-fluid p-3" alt="Kursi">
+                <div class="card-body d-flex flex-column">
+                  <p class="mb-1 text-muted small">(100)</p>
+                  <h6>Kursi Taman Besi</h6>
+                  <h6 class="text-dark fw-bold">Rp. 189.000</h6>
+    
+                  <div class="d-flex justify-content-center flex-wrap gap-1 mb-2">
+                    <span class="badge bg-success-subtle text-success fw-semibold">GRATIS ONGKIR</span>
+                    <span class="badge bg-danger-subtle text-danger fw-semibold">BONUS</span>
+                  </div>
+    
+                  <div class="mb-2 text-success fw-semibold small">
+                    ✅ Stok Tersedia
+                  </div>
+    
+                  <div class="d-flex justify-content-center gap-2 mt-auto">
+                    <img src="kursi.png" alt="Varian 1" class="img-thumbnail" style="width:50px; height:50px; object-fit:cover;">
+                    <img src="rak.png" alt="Varian 2" class="img-thumbnail" style="width:50px; height:50px; object-fit:cover;">
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+    
+          <!-- Tombol -->
+          <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-outline-primary btn-sm rounded-pill px-4 py-2">
+              Lihat Semua Produk
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
+  <div class="container my-4">
+
+    <!-- PRODUK RPL -->
+    <div class="section-header bg-success text-white fw-bold py-3 px-4 rounded-top">
+      PRODUK REKAYASA PERANGKAT LUNAK
+    </div>
+    <div class="p-3 bg-white rounded-bottom">
+      <div class="row g-3">
+        <div class="col-md-8">
+          <div class="product-card d-flex align-items-center justify-content-between p-3 border rounded shadow-sm">
+            <!-- Kiri: teks -->
+            <div>
+              <h4>WEBSITE & SISTEM INFORMASI</h4>
+              <p>Dari company profile, e-commerce, hingga aplikasi online</p>
+              <div class="mt-auto">
+                <button class="btn btn-outline-success btn-sm rounded-pill px-3 py-2 w-50">
+                  Lihat Semua Produk
+                </button>
+              </div>
+            </div>
+
+            <!-- Kanan: gambar -->
+            <img src="rpl.png" alt="Website" class="img-fluid" style="max-width:250px;">
+          </div>
+
+
+        </div>
+        <div class="col-md-4">
+          <div class="category-box">
+            <h6 class="fw-bold mb-3">BASIS APLIKASI</h6>
+            <button class="btn">MOBILE</button>
+            <button class="btn">WEBSITE</button>
+            <button class="btn">DESKTOP</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-2">
+        <div class="col-md-3">
+          <div class="product-card text-center">
+            <img src="web company profile.png" class="img-fluid mb-2 rounded" alt="Website Profile">
+            <h6>Website Company Profile</h6>
+            <ul class="text-start small mb-2">
+              <p>Website untuk memperkenalkan perusahaan, brand, atau bisnis lokal.</p>
+              <li>Desain modern</li>
+              <li>Responsif di semua perangkat</li>
+              <li>Mudah dikelola</li>
+            </ul>
+            <div class="mt-auto">
+              <button class="btn btn-outline-success btn-sm rounded-pill px-3 py-1 w-100">
+                BELI
+              </button>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="product-card text-center">
+            <img src="kasir.png" class="img-fluid mb-2 rounded" alt="POS">
+            <h6>Aplikasi Kasir (Point of Sale)</h6>
+            <ul class="text-start small mb-2">
+              <p>Platform untuk manajemen data siswa, guru, mata pelajaran, nilai, dan absensi.</p>
+              <li>Laporan real-time</li>
+              <li>Bisa online & offline</li>
+            </ul>
+            <div class="mt-auto">
+              <button class="btn btn-outline-success btn-sm rounded-pill px-3 py-1 w-100">
+                BELI
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="product-card text-center">
+            <img src="sistem info sklh.png" class="img-fluid mb-2 rounded" alt="Sistem Sekolah">
+            <h6>Sistem Informasi Sekolah</h6>
+            <ul class="text-start small mb-2">
+              <p>Platform untuk manajemen data siswa, guru, mata pelajaran, nilai, dan absensi</p>
+              <li>Dashboard interaktif</li>
+              <li>Cetak laporan otomatis</li>
+            </ul>
+            <div class="mt-auto">
+              <button class="btn btn-outline-success btn-sm rounded-pill px-3 py-1 w-100">
+                BELI
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="product-card text-center">
+            <img src="absen.png" class="img-fluid mb-2 rounded" alt="Absensi QR">
+            <h6>Aplikasi Absensi QR Code</h6>
+            <ul class="text-start small mb-2">
+              <p>Aplikasi absensi modern menggunakan scan QR untuk mencatat kehadiran siswa atau karyawan.</p>
+              <li>Integrasi kamera</li>
+              <li>Riwayat absensi real-time</li>
+            </ul>
+            <div class="mt-auto">
+              <button class="btn btn-outline-success btn-sm rounded-pill px-3 py-1 w-100">
+                BELI
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="container my-4">
+    <!-- Header -->
+    <div class="section-header bg-warning text-white fw-bold py-3 px-4 rounded-top">
+      PRODUK TEKSTIL
+    </div>
+    <div class="p-3 bg-white rounded-bottom">
+      <!-- isi konten di sini -->
+
+
+      <!-- Highlight Produk -->
+      <div class="row g-4 mb-4">
+        <!-- Card Kiri -->
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm h-100 p-4" style="background: #fff9e6;">
+            <div class="row align-items-center">
+              <div class="col-md-7">
+                <h5 class="fw-bold">KAIN ECOPRINT UNGGULAN</h5>
+                <p>Dibuat dengan teknik ecoprint menggunakan daun dan bunga asli, menghasilkan motif unik pada setiap lembar kain.</p>
+                <button class="btn btn-outline-dark rounded">PRODUK</button>
+
+              </div>
+              <div class="col-md-5 text-center">
+                <img src="syal1.png" alt="Produk Tekstil" class="img-fluid">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Kanan -->
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm h-100 p-4" style="background: #fff9e6;">
+            <div class="row align-items-center">
+              <div class="col-md-7">
+                <h5 class="fw-bold">KAIN & PRODUK TEKSTIL BERKUALITAS</h5>
+                <p>Dari kain batik, tenun, hingga kain ecoprint semua diproduksi oleh siswa jurusan tekstil.</p>
+                <button class="btn btn-outline-dark rounded">SEMUA PRODUK</button>
+
+              </div>
+              <div class="col-md-5 text-center">
+                <img src="syal2.png" alt="Produk Tekstil" class="img-fluid">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Produk -->
+      <div class="card shadow-sm border-0 p-4">
+        <div class="row row-cols-1 row-cols-md-4 g-4 text-center">
+
+          <!-- Produk 1 -->
+          <div class="col">
+            <div class="card h-100 border-0 d-flex flex-column">
+              <img src="batik tulis.png" class="card-img-top rounded p-2" alt="Kain Batik">
+              <div class="card-body d-flex flex-column">
+                <h6 class="fw-bold">Kain Batik Tulis</h6>
+                <ul class="text-start small">
+                  <li>Motif khas buatan tangan</li>
+                  <li>Bahan katun premium</li>
+                  <li>Warna tahan lama</li>
+                </ul>
+                <div class="mt-auto">
+                  <button class="btn btn-outline-success w-100">BELI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Produk 2 -->
+          <div class="col">
+            <div class="card h-100 border-0 d-flex flex-column">
+              <img src="tenun tradisional.png" class="card-img-top rounded p-2" alt="Kain Tenun">
+              <div class="card-body d-flex flex-column">
+                <h6 class="fw-bold">Kain Tenun Tradisional</h6>
+                <ul class="text-start small">
+                  <li>Tenunan rapi dan detail halus</li>
+                  <li>Cocok untuk pakaian atau dekorasi</li>
+                  <li>Pewarna alami ramah lingkungan</li>
+                </ul>
+                <div class="mt-auto">
+                  <button class="btn btn-outline-success w-100">BELI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Produk 3 -->
+          <div class="col">
+            <div class="card h-100 border-0 d-flex flex-column">
+              <img src="ecoprint.png" class="card-img-top rounded p-2" alt="Kain Ecoprint">
+              <div class="card-body d-flex flex-column">
+                <h6 class="fw-bold">Kain Ecoprint</h6>
+                <ul class="text-start small">
+                  <li>Motif alami dari daun dan bunga</li>
+                  <li>Ramah lingkungan & unik</li>
+                  <li>Cocok untuk fashion atau dekorasi</li>
+                </ul>
+                <div class="mt-auto">
+                  <button class="btn btn-outline-success w-100">BELI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Produk 4 -->
+          <div class="col">
+            <div class="card h-100 border-0 d-flex flex-column">
+              <img src="scarf.png" class="card-img-top rounded p-2" alt="Scarf & Syal">
+              <div class="card-body d-flex flex-column">
+                <h6 class="fw-bold">Scarf & Syal Batik</h6>
+                <ul class="text-start small">
+                  <li>Ringan, nyaman, dan elegan</li>
+                  <li>Desain eksklusif siswa SMK Tekstil</li>
+                  <li>Cocok untuk fashion sehari-hari</li>
+                </ul>
+                <div class="mt-auto">
+                  <button class="btn btn-outline-success w-100">BELI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-4">
+      <!-- Sidebar -->
+      <div class="col-md-3">
+        <div class="d-flex flex-column gap-3">
+          <div class="card border-0 shadow-sm">
+            <img src="servis&perawatan.png" class="card-img-top rounded" alt="Servis">
+            <div class="card-img-overlay d-flex align-items-end p-2">
+              <span class="bg-dark bg-opacity-50 text-white small rounded px-2 py-1">Servis & Perawatan Sistem Elektronik Otomotif</span>
+            </div>
+          </div>
+          <div class="card border-0 shadow-sm">
+            <img src="pemasangansistemkelistrikan.png" class="card-img-top rounded" alt="Kelistrikan">
+            <div class="card-img-overlay d-flex align-items-end p-2">
+              <span class="bg-dark bg-opacity-50 text-white small rounded px-2 py-1">Pemasangan Sistem Kelistrikan Mobil/Motor</span>
+            </div>
+          </div>
+          <div class="card border-0 shadow-sm">
+            <img src="pemasangansistemkelistrikan.png" class="card-img-top rounded" alt="Kelistrikan">
+            <div class="card-img-overlay d-flex align-items-end p-2">
+              <span class="bg-dark bg-opacity-50 text-white small rounded px-2 py-1">Pemasangan Sistem Kelistrikan Mobil/Motor</span>
+            </div>
+          </div>
+          <div class="card border-0 shadow-sm">
+            <img src="diagnosa ecu.png" class="card-img-top rounded" alt="ECU">
+            <div class="card-img-overlay d-flex align-items-end p-2">
+              <span class="bg-dark bg-opacity-50 text-white small rounded px-2 py-1">Diagnosa dan Perbaikan ECU</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Main Content -->
+      <div class="col-md-9">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-danger text-white fw-bold py-3 px-4">JASA JURUSAN OTOTRONIK</div>
+          <div class="card-body">
+            <div class="row g-3">
+              <!-- Bagian Foto -->
+              <div class="col-md-6">
+                <div class="row g-2 h-100">
+                  <!-- Foto Kecil -->
+                  <div class="col-4 d-flex flex-column h-100 gap-2">
+                    <img src="oto1.png" class="img-fluid rounded flex-fill" alt="Foto 1">
+                    <img src="oto2.png" class="img-fluid rounded flex-fill" alt="Foto 2">
+                    <img src="oto3.png" class="img-fluid rounded flex-fill" alt="Foto 3">
+                  </div>
+                  <!-- Foto Besar -->
+                  <div class="col-8">
+                    <img src="bengkel.png" class="img-fluid rounded h-100 w-100" alt="Bengkel">
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Bagian Deskripsi -->
+              <div class="col-md-6">
+                <h5 class="fw-bold border-bottom border-2 border-danger d-inline-block pb-1 mb-3">
+                  Bengkel Ototronik (Layanan Antar-Jemput)
+                </h5>
+                <p>Kami menyediakan jasa perbaikan kelistrikan dan elektronik mobil dengan layanan antar-jemput kendaraan. Layanan kami mencakup:</p>
+                <ul>
+                  <li>Jemput & antar kendaraan langsung ke rumah/kantor Anda</li>
+                  <li>Diagnosa EMS</li>
+                  <li>Perbaikan sistem kelistrikan</li>
+                  <li>Perawatan rutin</li>
+                </ul>
+                <p>Percayakan kendaraan Anda pada kami untuk hasil yang optimal dan terpercaya.</p>
+                <button class="btn btn-dark rounded-pill">SEMUA JASA</button>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+    <!-- Produk Section -->
+    <div class="mt-5">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <div class="row row-cols-1 row-cols-md-4 g-4 text-center">
+    
+            <!-- Produk 1 -->
+            <div class="col">
+              <div class="card border-0 h-100">
+                <img src="oto1.png" class="card-img-top img-fluid mx-auto d-block rounded p-2" style="height:230px; object-fit:cover;" alt="Produk">
+                <div class="card-body">
+                  <p class="mb-1 text-muted small">(100)</p>
+                  <h6 class="fw-bold">Servis & Perawatan Sistem Elektronik Otomotif</h6>
+                  <p class="fw-bold text-dark mb-1">Rp 100.000 – Rp 300.000</p>
+                  <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-sm rounded-pill text-success bg-success bg-opacity-10 border-0"> Pesan Jasa </button>
+                    <button class="btn btn-sm rounded-pill text-danger bg-danger bg-opacity-10 border-0"> Hubungi </button>
+                  </div>
+                  <div class="d-flex justify-content-center gap-2 mt-2">
+                    <img src="oto1.png" style="width:40px; height:40px; object-fit:cover; border:1px solid #ddd; border-radius:4px;" alt="">
+                    <img src="oto2.png" style="width:40px; height:40px; object-fit:cover; border:1px solid #ddd; border-radius:4px;" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Produk 2 -->
+            <div class="col">
+              <div class="card border-0 h-100">
+                <img src="oto2.png" class="card-img-top img-fluid mx-auto d-block rounded p-2" style="height:230px; object-fit:cover;" alt="Produk">
+                <div class="card-body">
+                  <p class="mb-1 text-muted small">(100)</p>
+                  <h6 class="fw-bold">Servis & Perawatan Sistem Elektronik Otomotif</h6>
+                  <p class="fw-bold text-dark mb-1">Rp 100.000 – Rp 300.000</p>
+                  <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-sm rounded-pill text-success bg-success bg-opacity-10 border-0"> Pesan Jasa </button>
+                    <button class="btn btn-sm rounded-pill text-danger bg-danger bg-opacity-10 border-0"> Hubungi </button>
+                  </div>
+                  <div class="d-flex justify-content-center gap-2 mt-2">
+                    <img src="oto2.png" style="width:40px; height:40px; object-fit:cover; border:1px solid #ddd; border-radius:4px;" alt="">
+                    <img src="oto3.png" style="width:40px; height:40px; object-fit:cover; border:1px solid #ddd; border-radius:4px;" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Produk 3 -->
+            <div class="col">
+              <div class="card border-0 h-100">
+                <img src="oto3.png" class="card-img-top img-fluid mx-auto d-block rounded p-2" style="height:230px; object-fit:cover;" alt="Produk">
+                <div class="card-body">
+                  <p class="mb-1 text-muted small">(100)</p>
+                  <h6 class="fw-bold">Servis & Perawatan Sistem Elektronik Otomotif</h6>
+                  <p class="fw-bold text-dark mb-1">Rp 100.000 – Rp 300.000</p>
+                  <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-sm rounded-pill text-success bg-success bg-opacity-10 border-0"> Pesan Jasa </button>
+                    <button class="btn btn-sm rounded-pill text-danger bg-danger bg-opacity-10 border-0"> Hubungi </button>
+                  </div>
+                  <div class="d-flex justify-content-center gap-2 mt-2">
+                    <img src="oto3.png" style="width:40px; height:40px; object-fit:cover; border:1px solid #ddd; border-radius:4px;" alt="">
+                    <img src="oto1.png" style="width:40px; height:40px; object-fit:cover; border:1px solid #ddd; border-radius:4px;" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Produk 4 -->
+            <div class="col">
+              <div class="card border-0 h-100">
+                <img src="oto1.png" class="card-img-top img-fluid mx-auto d-block rounded p-2" style="height:230px; object-fit:cover;" alt="Produk">
+                <div class="card-body">
+                  <p class="mb-1 text-muted small">(100)</p>
+                  <h6 class="fw-bold">Servis & Perawatan Sistem Elektronik Otomotif</h6>
+                  <p class="fw-bold text-dark mb-1">Rp 100.000 – Rp 300.000</p>
+                  <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-sm rounded-pill text-success bg-success bg-opacity-10 border-0"> Pesan Jasa </button>
+                    <button class="btn btn-sm rounded-pill text-danger bg-danger bg-opacity-10 border-0"> Hubungi </button>
+                  </div>
+                  
+                  <div class="d-flex justify-content-center gap-2 mt-2">
+                    <img src="oto2.png" style="width:40px; height:40px; object-fit:cover; border:1px solid #ddd; border-radius:4px;" alt="">
+                    <img src="oto3.png" style="width:40px; height:40px; object-fit:cover; border:1px solid #ddd; border-radius:4px;" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Tombol Semua Produk -->
+          <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-danger rounded-pill px-6 py-2">SEMUA PRODUK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <img src="logo smk.png" alt="Logo SMKN 2 Karanganyar" class="footer-logo">
+  
+          <h3 class="footer-description small">
+            SMK Negeri 2 Karanganyar adalah salah satu Sekolah Menengah Kejuruan favorit di Kabupaten Karanganyar.
+            Serta merupakan sekolah yang berpendidikan karakter, berwawasan, disiplin, tanggung jawab, dan bermoral baik.
+          </h3>
+        </div>
+        <div class="col-md-6">
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.7741482963037!2d110.96083547409737!3d-7.596567392434332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1449ff36df35%3A0xd0a93b0969f2ee5!2sSMK%20Negeri%202%20Karanganyar!5e0!3m2!1sid!2sid!4v1693456789012!5m2!1sid!2sid"
+              allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  
+  <div class="footer-bottom">
+    © 2025 TEFA SMKN 2 Karanganyar. All Rights Reserved
+  </div>
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

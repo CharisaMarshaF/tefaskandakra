@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Waka Kurikulum - Teaching Factory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+
+    </head>
+    <body>
+    <div class="d-flex">
+    <div class="sidebar d-none d-md-flex flex-column p-4 vh-100 position-fixed top-0 start-0">
+        <div class="mb-5 text-center">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Trading Factory</div>
+                    <div class="logo-sub">SISTEM MANAJEMEN</div>
+                </div>
+            </a>
+        </div>
+            <ul class="nav flex-column mt-2">
+                <li class="nav-item mb-2">
+                    <a href="#" class="nav-link active py-3 px-4 d-flex align-items-center fw-medium">
+                        <i class="fa-solid fa-gauge-high me-3 fs-5"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="#" class="nav-link py-3 px-4 d-flex align-items-center fw-medium">
+                        <i class="fa-solid fa-people-group me-3 fs-5"></i> Users
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="#" class="nav-link py-3 px-4 d-flex align-items-center fw-medium">
+                        <i class="fa-solid fa-building me-3 fs-5"></i> Jurusan & Kelas
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="#" class="nav-link py-3 px-4 d-flex align-items-center fw-medium">
+                        <i class="fa-solid fa-chart-line me-3 fs-5"></i> Laporan Sistem
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content flex-grow-1 p-4" style="margin-left: 280px;">
+            <nav class="navbar navbar-expand-lg bg-white rounded-4 shadow-sm mb-4">
+                <div class="container-fluid">
+                    <button class="btn d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-collapse" aria-controls="sidebar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa-solid fa-bars fs-5"></i>
+                    </button>
+                    <div class="input-group me-3 d-none d-md-flex" style="max-width: 400px;">
+                        <span class="input-group-text bg-transparent border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0 custom-input" placeholder="Search here ...">
+                    </div>
+                    <div class="d-flex align-items-center ms-auto">
+                        <div class="position-relative me-4">
+                            <i class="fa-solid fa-bell fs-5 text-secondary"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">1</span>
+                        </div>
+                        <div class="dropdown">
+                            <a class="d-flex align-items-center text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://i.ibb.co/L8y2wVp/avatar.png" alt="User Avatar" class="rounded-circle me-2" width="40" height="40">
+                                <div class="d-none d-md-block">
+                                    <div class="fw-semibold text-dark">Darsono</div>
+                                    <small class="text-muted">Guru</small>
+                                </div>
+                                <i class="fa-solid fa-chevron-down ms-2 text-muted"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="content-card p-4 p-md-5">
+                <h1 class="fs-3 fw-bold text-dark mb-1">Dashboard Waka Kurikulum</h1>
+                <p class="text-muted mb-4">WAKA Kurikulum - Kelola Jadwal Kelas Industri</p>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-md-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="fa-solid fa-code fa-2x text-muted"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Jumlah Kelas Industri</h6>
+                                <p class="fs-3 fw-bold mb-0 text-dark">4</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="fa-solid fa-users fa-2x" style="color: #17e335;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Siswa Kelas Industri</h6>
+                                <p class="fs-3 fw-bold mb-0 text-dark">432</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="fa-solid fa-clipboard-check fa-2x" style="color: #4168e3;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Outcome</h6>
+                                <p class="fs-3 fw-bold mb-0 text-dark">89</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="fa-solid fa-handshake-angle fa-2x" style="color: #ff9800;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Mitra Industri</h6>
+                                <p class="fs-3 fw-bold mb-0 text-dark">12</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-4 mb-4">
+                    <h5 class="fw-bold mb-4">MITRA DUDI - Teaching Factory</h5>
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 align-items-center justify-content-center">
+                        <div class="col text-center mitra-logo">
+                            <img src="https://i.ibb.co/f4n6m9y/exp.png" alt="EXP Logo" class="img-fluid">
+                        </div>
+                        <div class="col text-center mitra-logo">
+                            <img src="https://i.ibb.co/j325Wc5/msm.png" alt="MSM Solo Logo" class="img-fluid">
+                        </div>
+                        <div class="col text-center mitra-logo">
+                            <img src="https://i.ibb.co/hV4sQ0C/nas.png" alt="Nasmaco Logo" class="img-fluid">
+                        </div>
+                        <div class="col text-center mitra-logo">
+                            <img src="https://i.ibb.co/f4n6m9y/exp.png" alt="EXP Logo" class="img-fluid">
+                        </div>
+                        <div class="col text-center mitra-logo">
+                            <img src="https://i.ibb.co/j325Wc5/msm.png" alt="MSM Solo Logo" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4">Jumlah Kelas Industri</h5>
+                            <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
+                                <div class="chart-placeholder flex-shrink-0 mb-3 mb-md-0">
+                                    <i class="fa-solid fa-chart-pie fa-3x text-muted"></i>
+                                </div>
+                                <div class="ms-md-4">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="d-flex align-items-center mb-2">
+                                            <div class="rounded-circle me-2" style="width: 12px; height: 12px; background-color: #4168e3;"></div>
+                                            Mesin<span class="ms-auto fw-bold">16 Kelas</span>
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <div class="rounded-circle me-2" style="width: 12px; height: 12px; background-color: #17e335;"></div>
+                                            RPL<span class="ms-auto fw-bold">12 Kelas</span>
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <div class="rounded-circle me-2" style="width: 12px; height: 12px; background-color: #ff9800;"></div>
+                                            Tekstil<span class="ms-auto fw-bold">9 Kelas</span>
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <div class="rounded-circle me-2" style="width: 12px; height: 12px; background-color: #e31717;"></div>
+                                            Otomotif<span class="ms-auto fw-bold">10 Kelas</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4">Jumlah Siswa</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="fw-medium">Mesin</small>
+                                        <small class="text-muted">432 dari 500</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-siswa" role="progressbar" style="width: 86.4%;" aria-valuenow="432" aria-valuemin="0" aria-valuemax="500"></div>
+                                    </div>
+                                </li>
+                                <li class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="fw-medium">Mesin</small>
+                                        <small class="text-muted">432 siswa</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-siswa" role="progressbar" style="width: 86.4%;" aria-valuenow="432" aria-valuemin="0" aria-valuemax="500"></div>
+                                    </div>
+                                </li>
+                                <li class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="fw-medium">RPL</small>
+                                        <small class="text-muted">432 siswa</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-siswa" role="progressbar" style="width: 86.4%;" aria-valuenow="432" aria-valuemin="0" aria-valuemax="500"></div>
+                                    </div>
+                                </li>
+                                <li class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="fw-medium">Otomotif</small>
+                                        <small class="text-muted">432 siswa</small>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-siswa" role="progressbar" style="width: 86.4%;" aria-valuenow="432" aria-valuemin="0" aria-valuemax="500"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

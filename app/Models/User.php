@@ -41,10 +41,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
+
     // Tambahkan method ini untuk memberitahu Laravel bahwa kolom yang digunakan untuk login adalah 'username'
     public function findForPassport($username)
     {
         return $this->where('username', $username)->first();
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'id_role');
+    }
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class, 'id_user', 'id');
     }
 }

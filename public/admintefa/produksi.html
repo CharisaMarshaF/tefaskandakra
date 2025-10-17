@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Factory - Manajemen Stok Barang</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Trading Factory</div>
+                    <div class="logo-sub">SISTEM MANAJEMEN</div>
+                </div>
+            </a>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="dasboard.html" class="menu-item">
+                <i class="bi bi-grid-1x2-fill"></i>
+                Dashboard
+            </a>
+            <a href="produk.html" class="menu-item">
+                <i class="bi bi-box-seam"></i>
+                Produk TEFA
+            </a>
+            <a href="stok.html" class="menu-item">
+                <i class="bi bi-archive-fill"></i>
+                Stok Bahan
+            </a>
+            <a href="pemesanan.html" class="menu-item">
+                <i class="bi bi-cart-fill"></i>
+                Pemesanan
+            </a>
+            <a href="pembayaran.html" class="menu-item">
+                <i class="bi bi-credit-card-fill"></i>
+                Pembayaran
+            </a>
+            <a href="produksi.html" class="menu-item active">
+                <i class="bi bi-gear-fill"></i>
+                Produksi
+            </a>
+            <a href="pengiriman.html" class="menu-item">
+                <i class="bi bi-truck"></i>
+                Pengiriman
+            </a>
+            <a href="siswaguru.html" class="menu-item">
+                <i class="bi bi-people-fill"></i>
+                Siswa & Guru
+            </a>
+            <a href="customer.html" class="menu-item">
+                <i class="bi bi-headset"></i>
+                CS
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-container">
+                <input type="text" placeholder="search here...">
+                <i class="bi bi-search search-icon"></i>
+            </div>
+            
+            <div class="user-section">
+                <i class="bi bi-bell notification-icon"></i>
+                <div class="user-profile">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <h6>Sukadi</h6>
+                        <small>Admin Web</small>
+                    </div>
+                    <i class="bi bi-chevron-down ms-2"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h2>Manajemen Produksi</h2>
+                    <p>Kelola dan pantau produksi TEFA</p>
+                </div>
+                <div class="header-buttons">
+                    <button class="btn btn-outline-secondary">
+                        <i class="bi bi-download"></i> Export Produksi
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Buat Job Baru
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="bi bi-list-task"></i>
+                    </div>
+                    <div class="stat-value">2</div>
+                    <p class="stat-label">Antrian Job</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="bi bi-play-circle"></i>
+                    </div>
+                    <div class="stat-value">4</div>
+                    <p class="stat-label">Sedang Produksi</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div class="stat-value">8</div>
+                    <p class="stat-label">Selesai Hari Ini</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-value">2</div>
+                    <p class="stat-label">Perlu Tindakan</p>
+                </div>
+            </div>
+
+            <!-- Alert -->
+            <div class="critical-alert">
+                <i class="bi bi-exclamation-triangle-fill alert-icon"></i>
+                <p class="alert-text">
+                    <strong>Peringatan Deadline!</strong>
+                    Ada 2 pekerjaan yang mendekati deadline dan memerlukan perhatian khusus
+                </p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" id="allProductionTab" onclick="switchProductionTab('all')">Semua Produksi</button>
+                    <button class="filter-tab" id="inProgressTab" onclick="switchProductionTab('progress')">Tipe & Kategori</button>
+                    <button class="filter-tab" id="completedTab" onclick="switchProductionTab('completed')">Riwayat Selesaian</button>
+                </div>
+                <div class="filter-controls">
+                    <input type="text" placeholder="Cari produk atau order..." id="searchProduction">
+                    <select id="statusFilter">
+                        <option>Semua Status</option>
+                        <option>Antrian</option>
+                        <option>Produksi</option>
+                        <option>Selesai</option>
+                    </select>
+                    <select id="typeFilter">
+                        <option>Semua Tipe</option>
+                        <option>Tekstil</option>
+                        <option>Elektronik</option>
+                        <option>Mekanik</option>
+                    </select>
+                    <div></div>
+                </div>
+            </div>
+
+            <!-- Production Grid -->
+            <div class="production-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                
+                <!-- Production Card 1 -->
+                <div class="production-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #f1f5f9;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <h6 style="font-weight: 600; margin: 0; color: #1a202c;">Tas Kanvas Custom</h6>
+                        <span class="status-badge status-processing" style="font-size: 11px;">Sedang Produksi</span>
+                    </div>
+                    <div style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">
+                        <strong>ORD-001</strong>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px;">
+                            <span style="color: #6c757d;">Jumlah: Tier 1</span>
+                            <span style="color: #6c757d;">Estimasi: Tier 2</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px;">
+                            <span style="color: #1a202c;">Qty: 50 pcs</span>
+                            <span style="color: #ef4444;">Deadline: 2025-01-20</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div style="background: #f1f5f9; height: 8px; border-radius: 4px; margin-bottom: 8px; overflow: hidden;">
+                            <div style="background: #3b82f6; height: 100%; width: 75%; border-radius: 4px;"></div>
+                        </div>
+                        <div style="font-size: 12px; color: #6c757d; text-align: right;">75%</div>
+                    </div>
+                    
+                    <div style="padding: 10px; background: #f8fafc; border-radius: 6px; margin-bottom: 15px;">
+                        <div style="font-size: 12px; color: #6c757d;">Customer: Logo Serahteruskan ke Bagian Desain</div>
+                    </div>
+                    
+                    <button style="width: 100%; padding: 8px; background: transparent; border: 1px solid #e2e8f0; border-radius: 6px; color: #6c757d; font-size: 13px; cursor: pointer;">
+                        Contact: Quality Check sebelum...
+                    </button>
+                </div>
+
+                <!-- Production Card 2 -->
+                <div class="production-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 2px solid #3b82f6;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <h6 style="font-weight: 600; margin: 0; color: #1a202c;">PCB Controller Arduino</h6>
+                        <span class="status-badge status-processing" style="font-size: 11px;">Sedang Produksi</span>
+                    </div>
+                    <div style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">
+                        <strong>ORD-004</strong>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px;">
+                            <span style="color: #6c757d;">Jumlah: Tier 1</span>
+                            <span style="color: #6c757d;">Estimasi: Tier 2</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px;">
+                            <span style="color: #1a202c;">Qty: 25 pcs</span>
+                            <span style="color: #ef4444;">Deadline: 2025-01-25</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div style="background: #f1f5f9; height: 8px; border-radius: 4px; margin-bottom: 8px; overflow: hidden;">
+                            <div style="background: #3b82f6; height: 100%; width: 65%; border-radius: 4px;"></div>
+                        </div>
+                        <div style="font-size: 12px; color: #6c757d; text-align: right;">65%</div>
+                    </div>
+                    
+                    <div style="padding: 10px; background: #f0f9ff; border-radius: 6px; margin-bottom: 15px;">
+                        <div style="font-size: 12px; color: #1e40af;">Customer: Testing Electronic Otomatis dulu</div>
+                    </div>
+                    
+                    <button style="width: 100%; padding: 8px; background: transparent; border: 1px solid #3b82f6; border-radius: 6px; color: #3b82f6; font-size: 13px; cursor: pointer;">
+                        Contact: Upload 50% selesai. ON SITE
+                    </button>
+                </div>
+
+                <!-- Production Card 3 -->
+                <div class="production-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #f1f5f9;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <h6 style="font-weight: 600; margin: 0; color: #1a202c;">Mesin Bubut Mini</h6>
+                        <span class="status-badge status-completed" style="font-size: 11px;">Selesai</span>
+                    </div>
+                    <div style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">
+                        <strong>ORD-003</strong>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px;">
+                            <span style="color: #6c757d;">Jumlah: Tier 3</span>
+                            <span style="color: #6c757d;">Estimasi: Tier 4</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px;">
+                            <span style="color: #1a202c;">Qty: 2 pcs</span>
+                            <span style="color: #10b981;">Selesai: 2025-01-15</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div style="background: #f1f5f9; height: 8px; border-radius: 4px; margin-bottom: 8px; overflow: hidden;">
+                            <div style="background: #10b981; height: 100%; width: 100%; border-radius: 4px;"></div>
+                        </div>
+                        <div style="font-size: 12px; color: #10b981; text-align: right;">100%</div>
+                    </div>
+                    
+                    <div style="padding: 10px; background: #f0fdf4; border-radius: 6px; margin-bottom: 15px;">
+                        <div style="font-size: 12px; color: #166534;">Progress: Siap untuk quality check</div>
+                    </div>
+                    
+                    <button style="width: 100%; padding: 8px; background: transparent; border: 1px solid #e2e8f0; border-radius: 6px; color: #6c757d; font-size: 13px; cursor: pointer;">
+                        Contact: Quality Check passed
+                    </button>
+                </div>
+
+                <!-- Production Card 4 -->
+                <div class="production-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #f1f5f9;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <h6 style="font-weight: 600; margin: 0; color: #1a202c;">Kemeja Batik Seragam</h6>
+                        <span class="status-badge status-completed" style="font-size: 11px;">Selesai</span>
+                    </div>
+                    <div style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">
+                        <strong>ORD-002</strong>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px;">
+                            <span style="color: #6c757d;">Jumlah: 30 pcs</span>
+                            <span style="color: #6c757d;">Estimasi: Tier 4</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px;">
+                            <span style="color: #1a202c;">Qty: 5 pcs</span>
+                            <span style="color: #10b981;">Selesai: 2025-01-14</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div style="background: #f1f5f9; height: 8px; border-radius: 4px; margin-bottom: 8px; overflow: hidden;">
+                            <div style="background: #10b981; height: 100%; width: 100%; border-radius: 4px;"></div>
+                        </div>
+                        <div style="font-size: 12px; color: #10b981; text-align: right;">100%</div>
+                    </div>
+                    
+                    <div style="padding: 10px; background: #f0fdf4; border-radius: 6px; margin-bottom: 15px;">
+                        <div style="font-size: 12px; color: #166534;">Progress: 5%</div>
+                    </div>
+                    
+                    <button style="width: 100%; padding: 8px; background: transparent; border: 1px solid #e2e8f0; border-radius: 6px; color: #6c757d; font-size: 13px; cursor: pointer;">
+                        Contact: Sudah QC Selesai, ON SITE (2)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist.js"></script>
+</body>
+</html>

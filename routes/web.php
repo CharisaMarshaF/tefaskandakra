@@ -73,7 +73,6 @@ Route::middleware(['auth', 'role:3'])->group(function () {
     Route::get('/dashboard-waka', function () {
         return view('waka.Dashboard');
     });
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::prefix('waka')->group(function () {
         Route::redirect('/', '/dashboard-waka');
@@ -128,7 +127,7 @@ Route::middleware(['auth', 'role:6'])
         
         // Project Progress (Laporan Progres)
         Route::get('/project-progress', [SiswaProjectProgressController::class, 'index'])->name('siswa.project_progress.index');
-        Route::post('/project-progress/store', [SiswaProjectProgressController::class, 'store'])->name('siswa.project_progress.store');
+        Route::post('/project-progress/store', [SiswaProjectProgressController::class, 'store'])->name('siswa.project-progress.store');
 
         Route::get('/file/download/{file}', [SiswaProjectProgressController::class, 'download'])->name('files.download');    });
         Route::get('/nilai-project', [SiswaNilaiProjectController::class, 'index'])->name('siswa.nilai_project.index');

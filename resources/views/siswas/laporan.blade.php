@@ -5,7 +5,7 @@
     <p class="text-muted mb-4">Kirim Progres Project Yang Kamu Kerjakan Kepada Industri</p>
     
     <!-- Form Upload Progres -->
-    <form action="{{ route('project-progress.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('siswa.project-progress.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row g-4 mb-4">
             <!-- Kolom Kiri -->

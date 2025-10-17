@@ -19,7 +19,7 @@ use App\Models\Perusahaan;
 class SiswaProjectProgressController extends Controller
 {
    
-    public function index()
+    public function index() 
     {
         $user_id = Auth::id();
 

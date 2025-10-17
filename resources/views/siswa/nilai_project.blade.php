@@ -45,9 +45,9 @@
 
 
                                 {{-- Tombol Unduh untuk sertifikat --}}
-                                @if ($grade->sertifikat_file_id)
+                                {{-- @if ($grade->sertifikat_file_id)
                                 <a href="{{ route('siswa.nilai_project.download', $grade->sertifikat_file_id) }}" class="btn btn-sm btn-outline-primary rounded-circle ms-2"><i class="fa-solid fa-download"></i></a>
-                                @endif
+                                @endif --}}
                             </td>
                         </tr>
                         @empty
@@ -115,11 +115,11 @@
         </div>
       </div>
       <div class="modal-footer">
-        @if ($grade->sertifikat_file_id)
+        {{-- @if ($grade->sertifikat_file_id)
           <a href="{{ route('siswa.nilai_project.download', $grade->sertifikat_file_id) }}" class="btn btn-primary">
             <i class="fa-solid fa-download me-1"></i> Unduh Sertifikat
           </a>
-        @endif
+        @endif --}}
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
       </div>
     </div>

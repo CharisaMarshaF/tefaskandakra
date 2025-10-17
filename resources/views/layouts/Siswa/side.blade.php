@@ -5,7 +5,7 @@
                 <i class="bi bi-graph-up"></i>
             </div>
             <div class="logo-text">
-                <div class="logo-main">Trading Factory</div>
+                <div class="logo-main">Teaching Factory</div>
                 <div class="logo-sub">SISTEM MANAJEMEN</div>
             </div>
         </a>

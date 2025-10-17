@@ -71,7 +71,7 @@ Route::middleware(['auth', 'role:4'])->group(function () {
     Route::get('kelola', [TeacherController::class, 'kelola'])->name('kelola');
     Route::get('/teacher/projects/detail/{project:kode_project}', [TeacherController::class, 'showDetailProject'])->name('teacher.projects.detailProject');
 
-    Route::get('nilai', [TeacherController::class, 'nilai'])->name('nilai');
+    Route::get('/teacher/nilai', [TeacherController::class, 'nilai'])->name('teacher.nilai');
     Route::get('prosesProduksi', [TeacherController::class, 'prosesProduksi'])->name('prosesProduksi');
     Route::post('prosesProduksi/store', [TeacherController::class, 'storeProgress'])->name('prosesProduksi.store');
     Route::get('project-tefa', [TeacherController::class, 'projectTefa'])->name('project-tefa');

@@ -40,7 +40,7 @@
                                 <select name="id_siswa" id="student_select" class="form-select form-control " required>
                                     <option value="">Pilih Siswa</option>
                                     @foreach ($students as $student)
-                                        <option value="{{ $student->user->id }}">{{ $student->nama_lengkap }}</option>
+                                        <option value="{{ $student->id }}">{{ $student->nama_lengkap }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -35,7 +35,7 @@ class SiswaNilaiProjectController extends Controller
         // Mengambil semua nilai project yang terkait dengan siswa ini.
         // Eager loading relasi 'project' untuk menghindari N+1 query problem.
         $gradedProjects = ProjectGrade::where('id_siswa', $siswa->id)
-    ->with(['project.perusahaan','project.members','project.grades','project.memberProgress','sertifikatFile'])
+    ->with(['project.perusahaan','project.members','project.grades','project.progress','sertifikatFile'])
     ->get();
 
 

@@ -111,7 +111,7 @@
           </span>
         </div>
         <div class="mb-3">
-          <strong>Progress:</strong> {{ $grade->project->memberProgress->first()?->progress_percent ?? 0 }}%
+          <strong>Progress:</strong> {{ $grade->project->progress->first()?->progress_percent ?? 0 }}%
         </div>
       </div>
       <div class="modal-footer">

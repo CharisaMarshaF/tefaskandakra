@@ -39,10 +39,10 @@
                 <i class="bi bi-people-fill"></i>
                 Kelola
             </a>
-            {{-- <a href="{{ route('nilaiguru') }}" class="menu-item {{ request()->is('nilai') ? 'active' : '' }}">
-                <i class="bi bi-star-fill"></i>
-                Nilai
-            </a> --}}
+            <a href="{{ route('teacher.nilai') }}" class="menu-item {{ request()->routeIs('teacher.nilai') ? 'active' : '' }}">
+              <i class="bi bi-star-fill"></i>
+              Nilai
+            </a>
             <a href="{{ route('prosesProduksi') }}" class="menu-item {{ request()->is('prosesProduksi') ? 'active' : '' }}">
                 <i class="bi bi-gear-fill"></i>
                 Produksi

@@ -64,4 +64,11 @@ class Siswa extends Model
     {
         return $this->hasMany(PengajuanKelasIndustri::class, 'id_siswa');
     }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_members', 'id_siswa', 'id_project')
+                    ->withPivot('role', 'assigned_at')
+                    ->withTimestamps();
+    }
 }

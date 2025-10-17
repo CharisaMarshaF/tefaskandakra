@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class SiswaProjectController extends Controller
 {
 public function index(Request $request)
-{
+{ 
     $siswa = Siswa::where('id_user', Auth::id())->first();
     if (!$siswa) abort(403, 'Anda bukan siswa atau data siswa belum terdaftar.');
 
@@ -25,7 +25,7 @@ public function index(Request $request)
     $projectsQuery = Project::with([
         'perusahaan',
         'grades' => fn($q) => $q->where('id_siswa', $siswa->id)->with('sertifikatFile'),
-        'memberProgress' => fn($q) => $q->where('id_siswa', $siswa->id)
+        'progress' => fn($q) => $q->where('id_siswa', $siswa->id)
     ])
     ->whereHas('members', fn($q) => $q->where('id_siswa', $siswa->id))
     ->whereIn('status', $validStatuses);
@@ -35,7 +35,7 @@ public function index(Request $request)
     }
 
     $projects = $projectsQuery->get()->map(function($project) {
-        $project->progress_value = $project->memberProgress->max('progress_percent') ?? 0;
+        $project->progress_value = $project->progress->max('progress_percent') ?? 0;
 
         if($project->status == 'selesai') {
             $grade = $project->grades->first();

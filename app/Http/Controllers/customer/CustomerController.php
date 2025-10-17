@@ -73,14 +73,14 @@ class CustomerController extends Controller
 
 
     public function jurusan($id)
-{
-    $produk = Produk::with('jurusan')
-        ->where('id_jurusan', $id)
-        ->where('status', 'aktif')
-        ->get();
+    {
+        $produk = Produk::with('jurusan')
+            ->where('id_jurusan', $id)
+            ->where('status', 'aktif')
+            ->get();
 
-    return view('customer.jurusan', compact('produk'));
-}
+        return view('customer.jurusan', compact('produk'));
+    }
 
     public function kontak()
     {

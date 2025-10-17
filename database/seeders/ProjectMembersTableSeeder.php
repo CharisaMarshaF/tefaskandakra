@@ -12,7 +12,7 @@ class ProjectMembersTableSeeder extends Seeder
         DB::table('project_members')->insert([
             [
                 'id_project'  => 1,
-                'id_siswa'    => 2,
+                'id_siswa'    => 1,
                 'role'        => 'Frontend Developer',
                 'assigned_at' => now(),
                 'created_at'  => now(),

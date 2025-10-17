@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->string('nama_file', 200);
+            $table->string('file_path')->nullable();
             $table->string('file_type', 50)->comment('sertifikat, laporan, dokumen');
             $table->timestamp('uploaded_at')->useCurrent();
             $table->timestamps();

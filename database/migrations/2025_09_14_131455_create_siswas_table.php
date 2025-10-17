@@ -6,14 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('siswas', function (Blueprint $table) {
+       Schema::create('siswas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
             $table->string('nis', 30)->unique();
             $table->string('nisn', 30)->nullable();
             $table->string('nama_lengkap', 150);
             $table->enum('gender', ['L', 'P']);
-            $table->date('TTL')->nullable();
+            $table->string('tempat_lahir', 150)->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->text('alamat')->nullable();
             $table->string('phone', 30)->nullable();
             $table->string('email', 150)->nullable();

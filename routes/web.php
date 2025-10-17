@@ -2,9 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Guru\TeacherController;
 use App\Http\Controllers\Siswas\SiswasController;
-use App\Http\Controllers\OrangTuas\OrangTuaController;
+use App\Http\Controllers\waka\SertifikatController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\waka\NilaiProjectController;
+use App\Http\Controllers\OrangTuas\OrangTuaController;
+use App\Http\Controllers\waka\JadwalProduksiTefaController;
+use App\Http\Controllers\waka\JadwalKelasIndustriController;
+use App\Http\Controllers\Guru\DashboardController as DashboardTeacherController;
+
+///
+
+use App\Http\Controllers\Siswa\DashboardController;
+use App\Http\Controllers\Siswa\SiswaProjectController;
+use App\Http\Controllers\Siswa\KelasIndustriController;
+use App\Http\Controllers\Siswa\SiswaNilaiProjectController;
+use App\Http\Controllers\Siswa\SiswaProjectProgressController;
+use App\Http\Controllers\Siswa\DashboardController as SiswaDashboardController;
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -50,11 +66,21 @@ Route::middleware(['auth', 'role:3'])->group(function () {
 });
 
 
-
 Route::middleware(['auth', 'role:4'])->group(function () {
-    Route::get('/dashboard-guru', function () {
-        return "Halaman khusus Guru Pembimbing";
-    });
+    Route::get('/dashboard-guru', [DashboardTeacherController::class, 'index'])->name('dashboard.guru');
+    Route::get('kelola', [TeacherController::class, 'kelola'])->name('kelola');
+    Route::get('/teacher/projects/detail/{project:kode_project}', [TeacherController::class, 'showDetailProject'])->name('teacher.projects.detailProject');
+
+    Route::get('nilai', [TeacherController::class, 'nilai'])->name('nilai');
+    Route::get('prosesProduksi', [TeacherController::class, 'prosesProduksi'])->name('prosesProduksi');
+    Route::post('prosesProduksi/store', [TeacherController::class, 'storeProgress'])->name('prosesProduksi.store');
+    Route::get('project-tefa', [TeacherController::class, 'projectTefa'])->name('project-tefa');
+    Route::post('/teacher/projects/update-deadline', [TeacherController::class, 'updateDeadline'])->name('teacher.projects.updateDeadline');
+    Route::get('project/create', [TeacherController::class, 'create'])->name('project.create');
+    Route::post('teacher/project/store', [TeacherController::class, 'projectStore'])->name('teacher.projects.store');
+
+    Route::post('/teacher/grades/store', [TeacherController::class, 'storeGrade'])->name('teacher.grades.store');
+
 });
 
 Route::middleware(['auth', 'role:5'])->group(function () {
@@ -63,19 +89,30 @@ Route::middleware(['auth', 'role:5'])->group(function () {
     });
 });
 
+Route::middleware(['auth', 'role:6'])
+    ->prefix('siswa')
+    ->group(function () {
+        Route::get('/dashboard', [SiswaDashboardController::class, 'index'])
+            ->name('siswa.dashboard');
 
-Route::middleware(['auth', 'role:6'])->group(function () {
-    Route::get('/dashboard-siswa', [SiswasController::class, 'index'])->name('siswa.index');
-    Route::get('/kelasindustri', [SiswasController::class, 'kelasindustri'])->name('siswa.kelasindustri');
-    Route::get('/laporan', [SiswasController::class, 'laporan'])->name('siswa.laporan');
-    Route::get('/lihatnilai', [SiswasController::class, 'lihatnilai'])->name('siswa.lihatnilai');
-    Route::get('/produksi', [SiswasController::class, 'produksi'])->name('siswa.produksi');
+        // Kelas Industri
+        // Route::prefix('kelas-industri')->group(function () {
+        //     Route::get('/', [KelasIndustriController::class, 'index'])->name('siswa.kelas_industri.index');
+        //     Route::get('/{id}/detail', [KelasIndustriController::class, 'detail'])->name('siswa.kelas_industri.detail');
+        //     Route::get('/{id}/seleksi', [KelasIndustriController::class, 'seleksi'])->name('siswa.kelas_industri.seleksi');
+        //     Route::post('/store', [KelasIndustriController::class, 'store'])->name('siswa.kelas_industri.store');
+        // });
 
-    //  Tambahkan route POST untuk upload progres
-    Route::post('/laporan', [SiswasController::class, 'storeProgress'])->name('project-progress.store');
-});
+        // Project
+        Route::get('/projects', [SiswaProjectController::class, 'index'])->name('siswa.projects');
+        
+        // Project Progress (Laporan Progres)
+        Route::get('/project-progress', [SiswaProjectProgressController::class, 'index'])->name('siswa.project_progress.index');
+        Route::post('/project-progress/store', [SiswaProjectProgressController::class, 'store'])->name('siswa.project_progress.store');
 
-
+        Route::get('/file/download/{file}', [SiswaProjectProgressController::class, 'download'])->name('files.download');    });
+        Route::get('/nilai-project', [SiswaNilaiProjectController::class, 'index'])->name('siswa.nilai_project.index');
+        Route::get('/nilai-project/download/{file}', [SiswaNilaiProjectController::class, 'download'])->name('siswa.nilai_project.download');
 
 Route::middleware(['auth', 'role:7'])->group(function () {
     Route::get('/dashboard-orang-tua', [OrangTuaController::class, 'index']);

@@ -39,7 +39,7 @@ class AuthController extends Controller
                 3 => redirect('/dashboard-waka'),
                 4 => redirect('/dashboard-guru'),
                 5 => redirect('/dashboard-kepala-sekolah'),
-                6 => redirect('/dashboard-siswa'),
+                6 => redirect('/siswa/dashboard'),
                 7 => redirect('/dashboard-orang-tua'),
                 8 => redirect('/dashboard-perusahaan'),
                 9 => redirect('customer/profil_tefa'),

@@ -13,7 +13,7 @@ class ProjectGrade extends Model
     }
     public function project()
     {
-        return $this->belongsTo(Projects::class, 'id_project', 'id');
+        return $this->belongsTo(Project::class, 'id_project', 'id');
     }
     public function file()
     {
@@ -23,4 +23,16 @@ class ProjectGrade extends Model
     {
         return $this->belongsTo(User::class, 'graded_by', 'id');
     }
+
+        public function sertifikatFile()
+    {
+        return $this->belongsTo(File::class, 'sertifikat_file_id');
+    }
+
+    public function gradedBy()
+    {
+        return $this->belongsTo(User::class, 'graded_by');
+    }
+
+
 }

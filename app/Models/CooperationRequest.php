@@ -32,4 +32,10 @@ class CooperationRequest extends Model
     {
         return $this->belongsTo(File::class, 'id_file');
     }
+
+    
+    public function trackingLogs()
+    {
+        return $this->hasMany(TrackingLog::class, 'id_req');
+    }
 }

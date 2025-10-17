@@ -48,4 +48,19 @@ class projects extends Model
     {
         return $this->hasMany(ProjectMember::class, 'id_project', 'id');
     }
+
+        public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'id_siswa');
+    }
+
+        public function members()
+    {
+        return $this->hasMany(ProjectMember::class, 'id_project');
+    }
+    public function progress()
+    {
+        return $this->hasMany(ProjectProgress::class, 'id_project');
+    }   
+    
 }

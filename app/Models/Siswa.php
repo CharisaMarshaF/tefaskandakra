@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Siswa extends Model
 {
@@ -37,5 +38,30 @@ class Siswa extends Model
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'id_kelas', 'id');
+    }
+        public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'id_jurusan');
+    }
+
+    public function kelasIndustri()
+    {
+        return $this->belongsTo(KelasIndustri::class, 'id_kelasindustri');
+    }
+
+
+    public function orangTua()
+    {
+        return $this->hasMany(OrangTua::class, 'id_siswa');
+    }
+
+    public function pengajuanKelasIndustri()
+    {
+        return $this->hasMany(PengajuanKelasIndustri::class, 'id_siswa');
     }
 }

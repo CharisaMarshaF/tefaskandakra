@@ -10,8 +10,16 @@ class ProjectMember extends Model
     {
         return $this->belongsTo(Siswa::class, 'id_siswa', 'id');
     }
+    // public function project()
+    // {
+    //     return $this->belongsTo(Projects::class, 'id_project', 'id');
+    // }
+
+    
     public function project()
     {
-        return $this->belongsTo(Projects::class, 'id_project', 'id');
+        return $this->belongsTo(Project::class, 'id_project');
     }
+
+    
 }

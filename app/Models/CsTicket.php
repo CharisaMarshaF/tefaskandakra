@@ -34,4 +34,14 @@ class CsTicket extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+     public function assignedTo()
+    {
+        return $this->belongsTo(User::class, 'assigned_to');
+    }
+
+    public function trackingLogs()
+    {
+        return $this->hasMany(TrackingLog::class, 'id_ticket');
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 // ...
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -54,5 +56,30 @@ class User extends Authenticatable
     public function siswa()
     {
         return $this->hasOne(Siswa::class, 'id_user', 'id');
+    }
+
+    public function guru()
+    {
+        return $this->hasOne(Guru::class, 'id_user');
+    }
+
+    public function perusahaan()
+    {
+        return $this->hasOne(Perusahaan::class, 'id_user');
+    }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id_user');
+    }
+
+    public function orangTua()
+    {
+        return $this->hasOne(OrangTua::class, 'id_user');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'id_user');
     }
 }
